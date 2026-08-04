@@ -28,7 +28,7 @@ from .database import select_videos_from_db
 if __name__ == "__main__":
     videos = select_videos_from_db()
     print(len(videos))
-    for video in videos:
-        print(video.title)
-        print(video.channel_name)
+    # for video in videos:
+    #     print(video.title)
+    #     print(video.channel_name)
 
