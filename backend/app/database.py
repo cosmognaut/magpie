@@ -25,12 +25,12 @@ def select_videos_from_db() -> Sequence[Video]:
         results = session.exec(statement)
         return results.all()
 
-def add_embeddings(video_id: str, video_embeddings: list[float]) -> Video:
+def add_genre(video_id: str, genre: str) -> Video:
     """ UPDATE a single Video record in the database and return the updated object """
     with Session(engine) as session:
         statement = select(Video).where(Video.id == video_id)
         found_video = session.exec(statement).one()
-        found_video.embeddings = video_embeddings
+        found_video.genre = genre
         session.add(found_video)
         session.commit()
         session.refresh(found_video)

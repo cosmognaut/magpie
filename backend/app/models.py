@@ -17,7 +17,7 @@ class Video(SQLModel, table=True):
     thumbnail_link: str
     watched: bool = False
     liked: bool = False
-    embeddings: list[float] | None = Field(default=None, sa_column=Column(JSON)) # JSON column should map to TEXT datatype in sqlite
+    genre: str | None = None
     tags: list[str] | None = Field(default=None, sa_column=Column(JSON))
 
     #

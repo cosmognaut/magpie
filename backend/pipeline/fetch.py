@@ -151,7 +151,7 @@ async def get_videos_list(fetched_videos: dict[str, VideoData]) -> list[Video]:
                 video_data.category = CATEGORIES[category_id]
                 converted_datetime_publishedAt = datetime.strptime(video_data.published_at, "%Y-%m-%dT%H:%M:%SZ")
 
-                VIDEOS_LIST.append(Video(id=video_data.id, title=video_data.title, channel_name=video_data.channel_name, duration=video_data.duration, description=video_data.description, published_at=converted_datetime_publishedAt, view_count=video_data.view_count, thumbnail_link=video_data.thumbnail_link, tags=video_data.tags, category=video_data.category))
+                VIDEOS_LIST.append(Video(id=video_data.id, title=video_data.title, channel_name=video_data.channel_name, duration=video_data.duration, description=video_data.description, published_at=converted_datetime_publishedAt, view_count=video_data.view_count, thumbnail_link=video_data.thumbnail_link, tags=video_data.tags, category=video_data.category, genre=""))
 
 
         return VIDEOS_LIST
