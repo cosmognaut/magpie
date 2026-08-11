@@ -1,6 +1,6 @@
 import pandas as pd
 
-original = pd.read_parquet('clustered_watch_later.parquet')
+original = pd.read_parquet('data/clustered_watch_later.parquet')
 df = original.copy()
 """
 CLUSTERS TO BE MERGED // GENRES:
@@ -34,7 +34,9 @@ CLUSTERS TO BE MERGED // GENRES:
 """
 def assign_genre(series: pd.Series):
     cluster = series['genre_cluster']
-    if cluster == 2:
+    if cluster == 0:
+        genre = "Philosophy"
+    elif cluster == 2:
         genre = "Pokémon"
     elif cluster in (3, 4):
         genre = "Food"

@@ -35,3 +35,16 @@ def add_genre(video_id: str, genre: str) -> Video:
         session.commit()
         session.refresh(found_video)
         return found_video
+
+def get_genres() -> set[str]:
+    """ Return all genres present in the database """
+    videos = select_videos_from_db()
+    genres: list = [video.genre for video in videos]
+    return set(genres)
+
+def get_genre_videos(genre: str) -> Sequence[Video]:
+    """ Return all videos belonging to a particular genre """
+    with Session(engine) as session:
+        statement = select(Video).where(Video.genre == genre)
+        found = session.exec(statement).all()
+        return found
