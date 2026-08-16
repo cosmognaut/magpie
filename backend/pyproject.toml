@@ -20,4 +20,4 @@ dependencies = [
     "umap-learn>=0.5.12",
 ]
 [tool.fastapi]
-entrypoint = "backend.main:app"
+entrypoint = "main:app"
