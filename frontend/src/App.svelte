@@ -7,11 +7,9 @@
 	let found: string[] = $derived(genreList.filter((genre: string) => (genre.toLowerCase()).includes(query)));
 
 	// see https://zhangpascal.medium.com/how-to-properly-type-event-handlers-in-svelte-with-typescript-8e098c756eb9 on how to type event handlers.
-	// function onInput(event: Event & { currentTarget: EventTarget & HTMLInputElement }) {
-	// 	query = event.currentTarget.value.toLowerCase();
-	// 	console.log($state.snapshot(query));
-	// 	console.log(found);
-	// }
+	function onInput(event: Event & { currentTarget: EventTarget & HTMLInputElement }) {
+		query = event.currentTarget.value.toLowerCase();
+	}
 </script>
 
 <nav class="flex flex-row justify-center items-center p-0.5 gap-100 mt-5">	
@@ -25,7 +23,7 @@
 	<p class="text-lg max-w-lg text-center font-mono font-normal">A curation of your own watch later videos along with genre classification to get you to watch whatever you want.</p>
 </div>
 
-<Search bind:value={query}/>
+<Search onInput={onInput}/>
 
 <!-- when there's no input, found is still the entire genreList -->
 {#if found.length !== 0}
