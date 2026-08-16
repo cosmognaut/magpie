@@ -1,0 +1,9 @@
+## why this file exsits
+magpie was long in the making. I remember starting this project maybe a week after by birthday, way back in March. Things happened, and I could't focus on it. I am trying to focus all my attention on this project right now, but because this was so long in the making, a bunch of ideas have been running through my brain on how I could enhance this project. I do have the original figjam where I planned it all out, and scoped many things - but I still wanted to write some of the most interesting things down for posterity's sake, and for keeping everything arranged under one folder.
+
+## magpie enhcancement proposals
+In no particular order:
+1. Fuzzy search using `Fuse.js`. I had this idea after discussing genre search with Claude. I am implementing this on my own right now, but later in the future I would want to add fuzzy search for genres, as well as the video titles using that library.
+2. This is one of the oldest enhcancement proposals - semantic search across the entire database. This means that I would need to revamp by sqlite database to also store the "final string" column of my pandas dataframe. Or I could use a vector database, but I really don't want to do that. I could take a query from the user and run a fuzzy search across the final strings field of my database and display the relevant results. It'd also teach me much about optimising for quick data lookup.
+3. Mobile compatibility - I am not the type of guy who really devotes all their attention to every nook and cranny of a frontend design, but support for mobile devices should only require a few tailwind classes I should add for better accessibility. 
+4. In-app video watching support. This would make use of the youtube iframe API. Or I could do something more clever somehow and have it play in my desired player of choice, as an embdedd player looks bad.
