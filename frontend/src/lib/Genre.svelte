@@ -8,7 +8,6 @@
 	const scrollValue: number = 600;
 	// element is a reference to a DOM node which contains the element on which we want to scroll
 	function scrollRight(){
-		console.log(element.scrollLeft);
 		element.scrollBy({
 		  top: 0,
 		  left: scrollValue,
@@ -47,7 +46,7 @@
 	<h2 class="font-medium text-4xl px-4 font-display">{name}</h2>
 	<p class="px-4 font-mono">This is some text related to the genre..</p>
 	{#if scrolled}
-		<button class="absolute top-[55%] left-1 bg-emerald-700 rounded-none p-3 hover:bg-emerald-800 cursor-pointer border rotate-180" aria-label="Scroll" onclick={scrollLeft} transition:fade>
+		<button class="absolute top-[55%] left-1 bg-emerald-700 rounded-none p-3 hover:bg-emerald-800 cursor-pointer border rotate-180 z-10" aria-label="Scroll" onclick={scrollLeft} transition:fade>
 			<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#fef3c6" d="M16.15 13H5q-.425 0-.712-.288T4 12t.288-.712T5 11h11.15L13.3 8.15q-.3-.3-.288-.7t.288-.7q.3-.3.713-.312t.712.287L19.3 11.3q.15.15.213.325t.062.375t-.062.375t-.213.325l-4.575 4.575q-.3.3-.712.288t-.713-.313q-.275-.3-.288-.7t.288-.7z"/></svg>
 		</button>
 	{/if}

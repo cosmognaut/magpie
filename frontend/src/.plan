@@ -25,3 +25,4 @@ I have just discovered an element's scroll() method. The MDN page also mentions 
 Oh it was quite nice! I have implemented this and have also implemented a scroll back button. For that I declared a state called scrolled which is a boolean. If scrolled is true we display a scroll back button too. I am currently working on the transition (https://svelte.dev/docs/svelte/svelte-transition) for that same button. I am using svelte native transitions here.
 I have added the fade transition here. I might want to experiment with more transitions later that are tailwind specific.
 
+I am back. I think the next step for me is to add a duration overlay, as knowing the duration of a video matters a lot for me.
