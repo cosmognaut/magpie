@@ -31,11 +31,12 @@
 		<Genre name={genre}/>
 	{/each}
 {:else}
-	<div class="mt-4 mb-4 ml-4">
-	 <p class="text-xl">Nothing found!</p>
+	<div class="mt-4 mb-4 ml-4 w-100vw h-100vh">
+	 <p class="text-4xl text-center font-light">We don't have that genre!</p>
+	 <p class="text-xl text-center mt-2 font-extralight">Watch something else, maybe?</p>
 	</div>
 {/if}
 
-<div class="mt-4 ml-4 mb-4 text-center">
+<footer class="mt-4 ml-4 mb-4 text-center">
  <p>A cosmognaut production.</p>
-</div>
+</footer>
