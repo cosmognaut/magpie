@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-	--font-main: "Aspekta", sans-serif;
+	/* --font-main: "Aspekta", sans-serif; */
 	--font-display: "Caprasimo", serif;
 	--font-mono: "Martian Mono", mono;
 }
@@ -15,15 +15,7 @@
 	display: none;
 }
 
-@font-face {
-  font-family: Aspekta;
-  font-style: normal;
-  font-weight: 50 1000;
-  font-display: swap;
-  src: url("/fonts/AspektaVF.ttf");
-}
-
 body {
-	@apply bg-black text-white font-main font-[300] box-border no-scrollbar;
+	@apply bg-black text-amber-100 font-mono font-[300] box-border no-scrollbar;
 }
 

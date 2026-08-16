@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Video from './Video.svelte'
+	let { name } = $props();
 </script>
 <!---->
 <!-- <div class="flex flex-col items-start gap-2 p-4 my-7"> -->
@@ -15,8 +16,8 @@
 <!-- 	</div> -->
 <!-- </div> -->
 <!---->
-<div class="grid auto-rows-max gap-3 mt-5">
-	<h2 class="font-medium text-4xl px-4 font-display">Genre</h2>
+<div class="grid auto-rows-max gap-3 mt-10">
+	<h2 class="font-medium text-4xl px-4 font-display">{name}</h2>
 		<p class="px-4 font-mono">This is some text related to the genre..</p>
  		<div class="grid grid-flow-col gap-5 p-3 w-auto overflow-auto mr-4 ml-4 px-4 border">
 			<Video></Video>

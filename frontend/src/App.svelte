@@ -1,6 +1,20 @@
-<script>
+<script lang="ts">
 	import Genre from './lib/Genre.svelte'
 	import Search from './lib/Search.svelte'
+	import { genreList } from './globals.svelte'
+
+	let query: string = $state('');
+	let found: string[] = $derived(genreList.filter((genre: string) => (genre.toLowerCase()).includes(query)));
+
+	// see https://zhangpascal.medium.com/how-to-properly-type-event-handlers-in-svelte-with-typescript-8e098c756eb9 on how to type event handlers.
+	function onInput(event: Event & { currentTarget: EventTarget & HTMLInputElement }) {
+		query = event.currentTarget.value.toLowerCase();
+		console.log($state.snapshot(query));
+		console.log(found);
+		// now add some logic for setting the filtered array of genres, a derived state which is found out by taking the live input from the user and running an array.filter across the genre list.
+		// the search runs on every keystroke.
+		// now if the search bar is in focus and we have some filtered genres, I need to show them to the user.
+	}
 </script>
 
 <nav class="flex flex-row justify-center items-center p-0.5 gap-100 mt-5">	
@@ -14,13 +28,19 @@
 	<p class="text-lg max-w-lg text-center font-mono font-normal">A curation of your own watch later videos along with genre classification to get you to watch whatever you want.</p>
 </div>
 
-<Search/>
+<Search onInput={onInput}/>
 
-<Genre/>
-<Genre/>
-<Genre/>
-<Genre/>
-<Genre/>
-<Genre/>
-<Genre/>
-<Genre/>
+<!-- when there's no input, found is still the entire genreList -->
+{#if found.length !== 0}
+	{#each found as genre}
+		<Genre name={genre}/>
+	{/each}
+{:else}
+	<div class="mt-4 mb-4 ml-4">
+	 <p class="text-xl">Nothing found!</p>
+	</div>
+{/if}
+
+<div class="mt-4 ml-4 mb-4 text-center">
+ <p>A cosmognaut production.</p>
+</div>
