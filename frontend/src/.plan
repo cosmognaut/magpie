@@ -47,3 +47,8 @@ The plan for implementing CTRL-K:
 That's it.
 
 I am back. I have implemented it! This is so cool! The thing that was interesting was using a boolean to detect whether a key combination could be done and then later checking event.key to perform the said event combination. I also prevented default behavior, which was opening the browser's default search bar. I have also typed the entire thing to satisfy TypeScript, which is cool. I think I should commit this now.
+
+Wait, what if I were to keep the document.addEventListner logic inside of Search.svelte itself such that I don't need the component instance? let me try and see what happens when I do that.
+What the heck? It works??? This means that I could keep the logic native to Search.svelte too and there was no real need of a component instance. It all depends on where I want to write the logic. The Search component gets mounted at the same time as all the other components; if it was the case that search was mounted later or appeared AFTER CTRL-K was pressed, I couldn't have achieved it, as there was no Search component to begin with which would trigger the effect.
+
+I have decided that I will still keep the component instance version - no, it's not because it's more complicated or that I am attached to then code I wrote - it's because this is a global event listener and should live inside App.svelte, not insde any particular component. That's the right place to land for it.
