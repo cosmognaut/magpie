@@ -53,9 +53,10 @@
 	<p class="font-mono font-bold hover:text-emerald-500 cursor-pointer transition-colors">[ HOW? ]</p>
 </nav>
 
-<div class="flex gap-2 flex-col justify-center items-center">
-	<h1 class="text-6xl text-center mt-5 font-display text-emerald-500">magpie</h1>
-	<p class="text-lg max-w-lg text-center font-mono font-normal">A curation of your own watch later videos along with genre classification to get you to watch whatever you want.</p>
+<div class="flex gap-2 flex-col justify-center items-center dots">
+	<h1 class="text-6xl text-center mt-10 font-display text-emerald-500 mb-2">magpie</h1>
+	<p class="text-lg max-w-lg text-center font-mono font-normal">A curation of your own watch later videos along with genre classification to get you to watch whatever you want. Select a genre and start watching, or search for a genre using the search bar below.</p>
+	<p class="mt-10 text-center text-2xl mb-20"><span class="text-emerald-500">2399</span> videos // <span class="text-emerald-500">23</span> genres</p>
 </div>
 
 <Search onInput={onInput} bind:this={focusElement}/>
@@ -75,3 +76,21 @@
 <footer class="mt-10 ml-4 mb-4 text-center">
  <p>A cosmognaut production.</p>
 </footer>
+
+<style>
+	.dots {
+		/*
+		# Drawing a grid 101
+			Let's see what's happening here: a linear gradient works in such a way that it gets a direction, and two colors from you. Then by default it goes from top to bottom, but you could also have it go along the x-axis via a 90 degree rotation - that's the first argument. Here, let's look at everything line by line:
+			background-size: 80px 80px - we reserve a canvas of 80px from left to right (width) and 80px from top to bottom (height) as we want to draw two gradients here. We do this for all 3 layers.
+			background-position: center - we center the reserved canvas
+			background: three layers to this:-
+				- we draw a black linear gradient till 79px in an 80px canvas, and then draw a transparent color at the same 79th pixel. Now because these two values are the same, and the canvas is only of 80px in size, we hit a stop and for the remaining pixels (80-79 = 1px) we draw a transparent line. This means that this creates a horizontal transparent line across the bottom edge of the box. But why do we draw a line for the remaining one pixel, why not anything else? Here's it's useful to keep in mind the "fill-to-end" rule in CSS - A CSS gradient will always stretch to completely fill its canvas. Even though we stopped giving the browser instructions at 79px, the canvas keeps going until 80px. Because we didn't tell the brwoser what to do after 79px, the browser follows the default rule and takes the very last color we gave and stretches it all the way to the end. Here that very last color is 'transparent'.
+				- we first rotate the gradient by 90 degrees to align it with the x-axis. We do the same thing as we did in the first gradient, it's just that this time it's rotated by 90 degrees. This means that this creates a vertical line at the right edge of the box.
+				- the last argument to background is a solid white color (with an opacity of 0.55). The solid background represents the base canvas of the layers and fills the entire screen. It means that whatever the intersection of the first two gradients was, takes this color. This means that our tiny 1px dots will be this slightly off-white in color.
+		*/
+		background: linear-gradient(black 79px, transparent 79px), linear-gradient(90deg, black 79px, transparent 79px), rgba(255, 255, 255, 0.55);
+	  	background-position: center;
+	  	background-size: 80px 80px, 80px 80px, 80px 80px;
+  }
+</style>

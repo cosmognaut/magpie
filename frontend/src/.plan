@@ -57,3 +57,15 @@ The shortcut for the console is CTRL-SHIFT-I on helium, that's nice.
 Wait, why is it that I can't type the letter 'k' inside the search box? I am seeing that I can't do CTRL-k and then k - that doesn't work. It's beacause keyCombinationCanHappen boolean is set to be true whenever CTRL is pressed. So the moment I press k it starts to focus on the input element, which is what I wanted to happen on the FIRST time the k is pressed. I think I need to check whether I can access the "last key pressed".
 
 Okay, I am back and I have solved it. I tried the array of keys pressed method but it was a bit janky, so I avoided it and relied on traditional event.key instead. Now I have introduced another variable - keyCombinationActivated - which is a boolean and it's set to true if CTRL-K is pressed. So the sequence of events is this: the user presses CTRL -> keyCombinationCanHappen is set to true -> they press k next -> keyCombinationActivated is true -> if keyCombinationActivated is true, we set everything back to false so that we can await future key combinations. This means that keyCombinationCanHappen is again false and that means that typing k in is now allowed and doesn't focus on the input now, as keyCombinationCanHappen is false and the condition is invalid.
+
+What else do I have to do here? let's see. I might want to take a shower right now on break. But what should I do after it? Let's see:
+- the WHY and HOW pages will be implemented at the end.
+- FastAPI connection is also left.
+- 
+
+I think I will pick up the svg of a magpie to test whether adding an icon resolves the too much noise in the design.
+No, I did not shower today.
+
+I am back. I have implemented desaturation, which means that the thumbnails are only colored on hover and are desaturated/grayscale otherwise. This was done to combat the overwhelming noise being created on screen with all those thumbnails. I might revert this decision later.
+I am back again. I added a dots grid (linear gradient) on the magpie wordmark background. I think it looks alright, but my bone of contention is that I don't really understand how linear gradient works. Might I want to drill linear gradients?
+Ah I am back. See the code where I have used linear gradients.. I think I have explained it well there and have tried to demystify the blackbox I was dealing with.

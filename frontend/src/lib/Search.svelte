@@ -11,5 +11,5 @@
 </script>
 
 <div class="mr-4 ml-4">
-	<input type="text" placeholder="Search genres... or CTRL-K" class="border p-4 mt-10 mb-2 px-4 focus:outline-none text-xl w-full focus:border-emerald-500 hover:border-emerald-500 transition-colors" oninput={onInput} bind:this={element}/>
+	<input type="text" placeholder="Search genres... or CTRL-K" class="border p-4 mb-5 px-4 focus:outline-none text-xl w-full focus:border-emerald-500 hover:border-emerald-500 transition-colors" oninput={onInput} bind:this={element}/>
 </div>
