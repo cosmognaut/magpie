@@ -47,16 +47,18 @@
 	// see https://zhangpascal.medium.com/how-to-properly-type-event-handlers-in-svelte-with-typescript-8e098c756eb9 on how to type event handlers.
 </script>
 
-<nav class="md:flex flex-row justify-center items-center p-0.5 gap-100 mt-5 text-center">	
-	<p class="font-mono font-bold hover:text-emerald-500 cursor-pointer transition-colors">[ WHY? ]</p>
-	<p class="font-mono font-bold hover:text-emerald-500 cursor-pointer transition-colors">[ HOME ]</p>
-	<p class="font-mono font-bold hover:text-emerald-500 cursor-pointer transition-colors">[ HOW? ]</p>
-</nav>
+<div class="dots">
+	<nav class="md:flex flex-row justify-center items-center p-0.5 gap-100 mt-5 text-center">	
+		<p class="font-mono font-bold hover:text-emerald-500 cursor-pointer transition-colors">[ WHY? ]</p>
+		<p class="font-mono font-bold hover:text-emerald-500 cursor-pointer transition-colors">[ HOME ]</p>
+		<p class="font-mono font-bold hover:text-emerald-500 cursor-pointer transition-colors">[ HOW? ]</p>
+	</nav>
 
-<div class="flex gap-2 flex-col justify-center items-center dots">
-	<h1 class="text-6xl text-center mt-10 font-display text-emerald-500 mb-2">magpie</h1>
-	<p class="text-lg max-w-lg text-center font-mono font-normal">A curation of your own watch later videos along with genre classification to get you to watch whatever you want. Select a genre and start watching, or search for a genre using the search bar below.</p>
-	<p class="mt-10 text-center text-2xl mb-20"><span class="text-emerald-500">2399</span> videos // <span class="text-emerald-500">23</span> genres</p>
+	<div class="flex gap-2 flex-col justify-center items-center">
+		<h1 class="text-6xl text-center mt-10 font-display text-emerald-500 mb-2">magpie</h1>
+		<p class="text-lg max-w-lg text-center font-mono font-normal">A curation of your own watch later videos along with genre classification to get you to watch whatever you want. Select a genre and start watching, or search for a genre using the search bar below.</p>
+		<p class="mt-10 text-center text-2xl mb-20"><span class="text-emerald-500">2399</span> videos // <span class="text-emerald-500">23</span> genres</p>
+	</div>
 </div>
 
 <Search onInput={onInput} bind:this={focusElement}/>
@@ -89,8 +91,18 @@
 				- we first rotate the gradient by 90 degrees to align it with the x-axis. We do the same thing as we did in the first gradient, it's just that this time it's rotated by 90 degrees. This means that this creates a vertical line at the right edge of the box.
 				- the last argument to background is a solid white color (with an opacity of 0.55). The solid background represents the base canvas of the layers and fills the entire screen. It means that whatever the intersection of the first two gradients was, takes this color. This means that our tiny 1px dots will be this slightly off-white in color.
 		*/
-		background: linear-gradient(black 79px, transparent 79px), linear-gradient(90deg, black 79px, transparent 79px), rgba(255, 255, 255, 0.55);
+		background: linear-gradient(black 79px, transparent 79px), linear-gradient(90deg, black 79px, transparent 79px), rgba(255, 255, 255, 0.65);
 	  	background-position: center;
 	  	background-size: 80px 80px, 80px 80px, 80px 80px;
+		animation: infinite-loop 2000ms linear infinite;
+  }
+  
+  @keyframes infinite-loop {
+	from {
+		background-position: 0px 0px; /* move from (0, 0)*/
+		}
+	to {
+		background-position: 0px 80px; /* to (0, 80) - this creates a vertical shower-like animation*/
+	}
   }
 </style>
