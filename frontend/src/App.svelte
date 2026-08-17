@@ -7,6 +7,7 @@
 	let found: string[] = $derived(genreList.filter((genre: string) => (genre.toLowerCase()).includes(query))); // found genres
 	let focusElement: Search; // the component instance we need access to
 	let keyCombinationCanHappen: boolean = false; // for CTRL-K, see advancedSearch
+	let keyCombinationActivated: boolean = false;
 
 	function onInput(event: Event & { currentTarget: EventTarget & HTMLInputElement }) {
 		// convert the user's query in the search bar to lower case and assign it to state
@@ -17,12 +18,19 @@
 		// this is for CTRL-K. Prevent the default behaviour which would be focusing on the browser-default search bar.
 		// we call focus() on the focusElement, which is a reference to the Search component instance.
 
-		// console.log(event.key); - for debugging
+		// for debugging
+		console.log(event.key);
 		if (event.key === 'Control') keyCombinationCanHappen = true;
 		if (keyCombinationCanHappen && event.key === 'k') {
 			// console.log(keyCombinationCanHappen);
+			keyCombinationActivated = true;
 			event.preventDefault();
 			focusElement.callFocus();
+		}
+		if (keyCombinationActivated) {
+			// reset everything back to original values if key combination was activated to await future combinations
+			keyCombinationCanHappen = false;
+			keyCombinationActivated = false;
 		}
 	}
 
