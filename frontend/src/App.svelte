@@ -1,13 +1,16 @@
 <script lang="ts">
 	import Genre from './lib/Genre.svelte'
 	import Search from './lib/Search.svelte'
-	import { genreList } from './globals.svelte'
+	import { count } from './utils.svelte'
 
 	let query: string = $state(''); // user query inside the search box
-	let found: string[] = $derived(genreList.filter((genre: string) => (genre.toLowerCase()).includes(query))); // found genres
+	let statistics: [string[], number] = $state([[''], 0]);
+	let found: string[] = $derived(statistics[0].filter((genre: string) => (genre.toLowerCase()).includes(query))); // found genres
+
 	let focusElement: Search; // the component instance we need access to
 	let keyCombinationCanHappen: boolean = false; // for CTRL-K, see advancedSearch
 	let keyCombinationActivated: boolean = false;
+
 	const API_URL = 'http://127.0.0.1:8000/videos/';
 	let data;
 
@@ -20,10 +23,10 @@
 		"I swear it's almost done..",
 		"Dividing by zero...",
 		"The British are coming!",
-		"U R A Q T",
+		"I prefer the muddy water...",
 		"No animals harmed during the making of this..",
 		"Slay the mighty set!",
-		"Whole New World/Pretend World",
+		"WHOLE NEW WORLD",
 	]
 
 	function onInput(event: Event & { currentTarget: EventTarget & HTMLInputElement }) {
@@ -76,7 +79,11 @@
 	fetchPromise.then( (result) => {
 		data = result;
 		console.log(data);
+		let returned = count(data);
+		statistics[0] = returned[0];
+		statistics[1] = returned[1];
 	})
+
 
 	// see https://zhangpascal.medium.com/how-to-properly-type-event-handlers-in-svelte-with-typescript-8e098c756eb9 on how to type event handlers.
 </script>
@@ -91,7 +98,7 @@
 	<div class="flex gap-2 flex-col justify-center items-center">
 		<h1 class="text-6xl text-center mt-10 font-display text-emerald-500 mb-2">magpie</h1>
 		<p class="text-lg max-w-lg text-center font-mono font-normal">A curation of your own watch later videos along with genre classification to get you to watch whatever you want. Select a genre and start watching, or search for a genre using the search bar below.</p>
-		<p class="mt-10 text-center text-2xl mb-20"><span class="text-emerald-500">2399</span> videos // <span class="text-emerald-500">23</span> genres</p>
+		<p class="mt-10 text-center text-2xl mb-20"><span class="text-emerald-500">{statistics[1] === 0 ? '?' : statistics[1]}</span> videos // <span class="text-emerald-500">{statistics[0][0] === '' ? '?' : statistics[0].length}</span> genres</p>
 	</div>
 </div>
 
