@@ -8,6 +8,23 @@
 	let focusElement: Search; // the component instance we need access to
 	let keyCombinationCanHappen: boolean = false; // for CTRL-K, see advancedSearch
 	let keyCombinationActivated: boolean = false;
+	const API_URL = 'http://127.0.0.1:8000/videos/';
+	let data;
+
+	// credit: https://gist.github.com/meain/6440b706a97d2dd71574769517e7ed32
+	const LOADING_MESSAGES = [
+		"In space no one can hear you cry TT",
+		"Are we there yet?",
+		"Pokémon Emerald is the best pokémon game <3",
+		"The minions are doing their work..",
+		"I swear it's almost done..",
+		"Dividing by zero...",
+		"The British are coming!",
+		"U R A Q T",
+		"No animals harmed during the making of this..",
+		"Slay the mighty set!",
+		"Whole New World/Pretend World",
+	]
 
 	function onInput(event: Event & { currentTarget: EventTarget & HTMLInputElement }) {
 		// convert the user's query in the search bar to lower case and assign it to state
@@ -19,7 +36,7 @@
 		// we call focus() on the focusElement, which is a reference to the Search component instance.
 
 		// for debugging
-		console.log(event.key);
+		// console.log(event.key);
 		if (event.key === 'Control') keyCombinationCanHappen = true;
 		if (keyCombinationCanHappen && event.key === 'k') {
 			// console.log(keyCombinationCanHappen);
@@ -44,6 +61,55 @@
 		}
 	});
 
+	// async function fetchFromEndpoint(): Promise<any> {
+	// 	/*
+	// 	* Fetch data from the API and return a promsie that will be resolved by the await block
+	// 	*/
+	// 	let response = await fetch(API_URL); // waits for the promise to resolve because of await
+	// 	const data = await response.json(); // waits for the promise to resolve again
+	// 	return data; // the final JSON object promise - this needs to be awaited too to get the final object!
+	// 	// return await response.json(); is also totally valid!
+	// }
+	//
+	// const fetchPromise: Promise<any> = fetchFromEndpoint(); // this needs to be awaited
+	// // do this AFTER the promise resolves
+	// fetchPromise.then( (result) => {
+	// 	data = result;
+	// 	console.log(data);
+	// })
+
+
+	let finalData = $state();
+
+	$effect( () => {
+		async function hitEndpoint(url: string) {
+		/*
+		* This function returns nothing. It's an async function whose only job is to fetch a url and assign the JSON value to a variable.
+		* An async function always returns a promise. A common pitfall I have seen myself falling for is to return await response.json() and expect that it would return a nice JSON object even if the outside function isn't marked async. It does not, an async function can only ever return a promise.
+		* What you could do to resolve this (pun intended) is to use a .then((result) => { // do something with the result }) which could be used to assign something to the returned JSON object.
+		* Another approach, the one that I've opted for here, is to assign the value after the await, so that this is done when the value is actually computed (await makes the promise resolve later).
+		*/
+		const response: Response = await fetch(url);
+		if (!response.ok) {
+			throw new Error('There was an error in fetching the JSON data from the endpoint.')
+		}
+		else {
+			finalData = await response.json(); // this returns a resolved promise (the JSON object)
+		}
+	}
+
+		// actually do stuff.
+		hitEndpoint(API_URL);
+
+		// hitEndpoint(API_URL).then( (result) => {
+		// 	// we use .then() here to "resolve" the promise
+		// 	// but we could sure as hell use an async/await function and call it here
+		// 	// now that the promise is resolved, we can log this to the console for debugging
+		// 	finalData = result;
+		// 	console.log(finalData);
+		// });
+	});
+
 	// see https://zhangpascal.medium.com/how-to-properly-type-event-handlers-in-svelte-with-typescript-8e098c756eb9 on how to type event handlers.
 </script>
 
@@ -63,18 +129,26 @@
 
 <Search onInput={onInput} bind:this={focusElement}/>
 
-<!-- when there's no input, found is still the entire genreList -->
-{#if found.length !== 0}
-	{#each found as genre}
-		<Genre name={genre}/>
-	{/each}
-{:else}
-	<div class="mt-12 mb-4 ml-4 w-100vw h-100vh">
-	 <p class="text-4xl text-center font-light">We don't have that genre!</p>
-	 <p class="text-xl text-center mt-2 font-extralight">Watch something else, maybe?</p>
-	</div>
+<!-- {#await fetchPromise} -->
+	<!-- <p class="text-2xl text-center mt-10">{LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)]}</p> -->
+<!-- {:then data} -->
+	<!-- when there's no input, found is still the entire genreList -->
+{#if finalData}
+	{#if found.length !== 0}
+		{#each found as genre}
+			<Genre name={genre}/>
+		{/each}
+	{:else}
+		<div class="mt-12 mb-4 ml-4 w-100vw h-100vh">
+			 <p class="text-4xl text-center font-light">We don't have that genre!</p>
+			 <p class="text-xl text-center mt-2 font-extralight">Watch something else, maybe?</p>
+			 <!-- <p>{JSON.stringify(data)}</p> -->
+		</div>
+	{/if}
+<!-- {:catch error} -->
+	<!-- <p class="text-2xl text-center mt-10">Failed to fetch data. FastAPI is not so fast maybe? Error: {error}</p> -->
+<!-- {/await} -->
 {/if}
-
 <footer class="mt-10 ml-4 mb-4 text-center">
  <p>A cosmognaut production.</p>
 </footer>
