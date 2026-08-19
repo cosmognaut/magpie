@@ -105,3 +105,26 @@ Hmm. Now there's a lot to explain. It would just be better if you looked at my n
 
 My plan is to now create some utility functions, specifically one for counting the genres and the videos. As I am typing it, I am using types over interfaces. For no reason other than the fact that I like the word type more.
 Look at this cute little state I made, "if a variable is NOT unchanged over time, passed in from parent via props, or computable, it should be state" - I made a state for statistics which is the number of videos and the number of genres. Yeah that's it. I think I might wanna sleep now.
+
+ 2026-08-19
+ The first thing I am going to tackle today is the video fetching part - I need to populate the frontend with real video data. I think I might want to add the videos list to that cute little state from before as well. Or should I? I don't know, let me think about the best way to do this. the statistics state already has the genrelist and the number of videos. That is NEEDED for a part of my user interface to be a state. Why can't it have the video list as well? I think that's only fair. Yeah, I have decided that I am going to add one more thing inside this state and that's going to be all the videos, using Object.values() maybe inside utils.svelte.ts
+
+Okay now I have the Video nested array as my state too and I have assigned it a value as well.
+Okay, so I want title, thumbnail, duration, channel_name and views.
+Amazing, I finally populated the Video component and all looks so great! I can't wait to colorise all of this (i.e. remove the grayscale). But before that I need to do some things:
+1. Check if the video thumbnail is GET-table or not. If it isn't we replace the thumbnail with a thumbnail not found or something.
+2. Format the duration
+3. Format the views
+4. Randomise the video selection presented. Also randomise the genres while you're at it. I need to see something new each time I am on the website.
+
+Wait I just realised that perhaps the other stuff like the genres and the videoList doesn't really need to be state. It's because it's mostly unchanged over time. The only thing that was needed to be state was the video count and the genre list from earlier to count the number of genres - that was changing once we had fetched the data.
+Might I want to lazily fetch the video thumbnails? I remember that there was a section in the await block docs page where this exact pattern was discussed.
+Man I just learned what lazy loading is and this might be the exact thing I want to achieve here. I added loading="lazy" in my img element and it was super cool - I experienced a genuine performance imporovement.
+Also I just learned that an image element can have an onerror - so I am going to use that to swap it with my own image whenever things are breaking.
+I am seeing that the onerror handler is failing because of a race condition. I am now exploring how attachments can be used to lazy load images. Wait, I am not. This is just more work. All I want to do is to replace thumbnails with something else if the load is failing. Hmm, let me tackle the other things first as they're easier. This one's a bit hard.
+Let me now try to format the duration. We have an ISO string which is of the form "PT11H23M42S" for example. Here you just need to strip out the PT, get the numbers before the H for the hours, the numbers before the M for the minutes, and numbers before the S for the seconds.
+Phew, finally implemented the regex thing. That was alright. Now the duration is completely formatted and I only need to format the views.
+Let me do that real quick after getting some water.
+Okay, my plan to format the views is to create a function that takes in the view count and then do something like "if view count is greater than 1000 and less than 1 million, views = view count / 1000 (rounded off)". This would produce views like 857k or 2k or something. This is totally okay with me. Hmm now that I think about this, it would be something like Math.round((view_count)/1000 * 10) / 10. Now that that's done, let me commit all of this.
+
+

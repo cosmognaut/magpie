@@ -2,7 +2,7 @@
 	import Video from './Video.svelte'
 	import { fade } from 'svelte/transition'
 
-	let { name } = $props();
+	let { name, videos } = $props();
 	let scrolled: boolean = $state(false);
 	let element: Element;
 	const scrollValue: number = 600;
@@ -51,17 +51,9 @@
 		</button>
 	{/if}
  	<div class="grid grid-flow-col gap-5 p-3 w-auto overflow-auto mr-4 ml-4 px-4 border" bind:this={element}>
-		<Video></Video>
-		<Video></Video>
-		<Video></Video>
-		<Video></Video>
-		<Video></Video>
-		<Video></Video>
-		<Video></Video>
-		<Video></Video>
-		<Video></Video>
-		<Video></Video>
-		<Video></Video>
+		{#each videos as video}
+			<Video title={video.title} thumbnail={video.thumbnail_link} duration={video.duration} channelName={video.channel_name} views={video.view_count}/>
+		{/each}
 	</div>
 	<button class="absolute top-[55%] right-1 bg-black rounded-none p-3 cursor-pointer border border-emerald-500 transition-all hover:border-emerald-300 hover:scale-110 delay-50 duration-200 ease-in-out" aria-label="Scroll" onclick={scrollRight}>
 		<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#fef3c6" d="M16.15 13H5q-.425 0-.712-.288T4 12t.288-.712T5 11h11.15L13.3 8.15q-.3-.3-.288-.7t.288-.7q.3-.3.713-.312t.712.287L19.3 11.3q.15.15.213.325t.062.375t-.062.375t-.213.325l-4.575 4.575q-.3.3-.712.288t-.713-.313q-.275-.3-.288-.7t.288-.7z" class="hover:bg-amber-400"/></svg>

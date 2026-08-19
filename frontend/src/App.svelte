@@ -2,6 +2,7 @@
 	import Genre from './lib/Genre.svelte'
 	import Search from './lib/Search.svelte'
 	import { count } from './utils.svelte'
+	import type { Video } from './utils.svelte'
 
 	let query: string = $state(''); // user query inside the search box
 	let statistics: [string[], number] = $state([[''], 0]);
@@ -75,13 +76,15 @@
 	}
 
 	const fetchPromise: Promise<any> = fetchFromEndpoint(); // this needs to be awaited
+	let videoList: Video[][];
 	// do this AFTER the promise resolves
 	fetchPromise.then( (result) => {
 		data = result;
-		console.log(data);
 		let returned = count(data);
 		statistics[0] = returned[0];
 		statistics[1] = returned[1];
+		videoList = returned[2];
+		console.log(videoList);
 	})
 
 
@@ -110,13 +113,12 @@
 	<!-- when there's no input, found is still the entire genreList -->
 	{#if found.length !== 0}
 		{#each found as genre}
-			<Genre name={genre}/>
+			<Genre name={genre} videos={videoList[statistics[0].indexOf(genre)]}/>
 		{/each}
 	{:else}
 		<div class="mt-12 mb-4 ml-4 w-100vw h-100vh">
 			 <p class="text-4xl text-center font-light">We don't have that genre!</p>
 			 <p class="text-xl text-center mt-2 font-extralight">Watch something else, maybe?</p>
-			 <!-- <p>{JSON.stringify(data)}</p> -->
 		</div>
 	{/if}
 {:catch error}
