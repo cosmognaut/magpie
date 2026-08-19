@@ -126,5 +126,10 @@ Let me now try to format the duration. We have an ISO string which is of the for
 Phew, finally implemented the regex thing. That was alright. Now the duration is completely formatted and I only need to format the views.
 Let me do that real quick after getting some water.
 Okay, my plan to format the views is to create a function that takes in the view count and then do something like "if view count is greater than 1000 and less than 1 million, views = view count / 1000 (rounded off)". This would produce views like 857k or 2k or something. This is totally okay with me. Hmm now that I think about this, it would be something like Math.round((view_count)/1000 * 10) / 10. Now that that's done, let me commit all of this.
-
-
+Okay. Now I have done 2 and 3. Let me focus on 4 now and add a new task here:
+5. Remove placeholder text from genre descriptions.
+Anyways, let me randomise video selection now. I will need to "shuffle" the genres and the videos to produce some random sequence of them. I have done this thing before, let me look at my old code here.
+Hmm, so I have used a random function in my old code where I am taking a random number between 0 and my array's length. Then I am selecting a random item from the length and pushing that item to a new array. I am doing this until this new array's length is not exactly equal to the old array's length. Thus the while(true) loop. Is there a better way to do this? Okay no I am going to do the naive version as there's Knuth shuffle and whatnot.
+I am back again. Shuffling is done, and so is genre subtext assignment. I have also removed the grayscale from the video thumbnails to make it more tiktok-like (please, this is a joke).
+Dude some videos are like plain miscategorised and my OCD is kicking in. Eh, next time I won't use miniLM. I will use a model which has more dimensions or however this works so that my embeddings are of a "higher" quality.
+Anyways, let me commit this.

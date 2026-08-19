@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Genre from './lib/Genre.svelte'
 	import Search from './lib/Search.svelte'
-	import { count } from './utils.svelte'
+	import { count, shuffle } from './utils.svelte'
 	import type { Video } from './utils.svelte'
 
 	let query: string = $state(''); // user query inside the search box
-	let statistics: [string[], number] = $state([[''], 0]);
-	let found: string[] = $derived(statistics[0].filter((genre: string) => (genre.toLowerCase()).includes(query))); // found genres
+	let statistics: [Array<string>, number] = $state([[''], 0]);
+	let found: Array<string> = $derived(statistics[0].filter((genre: string) => (genre.toLowerCase()).includes(query))); // found genres
 
 	let focusElement: Search; // the component instance we need access to
 	let keyCombinationCanHappen: boolean = false; // for CTRL-K, see advancedSearch
@@ -21,7 +21,7 @@
 		"Are we there yet?",
 		"Pokémon Emerald is the best pokémon game <3",
 		"The minions are doing their work..",
-		"I swear it's almost done..",
+		"I promise it's almost done..",
 		"Dividing by zero...",
 		"The British are coming!",
 		"I prefer the muddy water...",
@@ -76,7 +76,7 @@
 	}
 
 	const fetchPromise: Promise<any> = fetchFromEndpoint(); // this needs to be awaited
-	let videoList: Video[][];
+	let videoList: Array<Video[]> = $state([]); // I made this a state because Svelte was giving me this error: non_reactive_update
 	// do this AFTER the promise resolves
 	fetchPromise.then( (result) => {
 		data = result;
@@ -84,10 +84,7 @@
 		statistics[0] = returned[0];
 		statistics[1] = returned[1];
 		videoList = returned[2];
-		console.log(videoList);
 	})
-
-
 	// see https://zhangpascal.medium.com/how-to-properly-type-event-handlers-in-svelte-with-typescript-8e098c756eb9 on how to type event handlers.
 </script>
 
@@ -112,7 +109,7 @@
 {:then data}
 	<!-- when there's no input, found is still the entire genreList -->
 	{#if found.length !== 0}
-		{#each found as genre}
+		{#each shuffle(found) as genre}
 			<Genre name={genre} videos={videoList[statistics[0].indexOf(genre)]}/>
 		{/each}
 	{:else}
