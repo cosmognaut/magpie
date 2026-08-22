@@ -13,7 +13,7 @@
 
 	function updatePage(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement}, name: string) {
 		event.preventDefault();
-		history.pushState(null, "", name); // the last param controls what's displayed after the / in the URL.
+		if (name !== 'home') history.pushState(null, "", name); // the last param controls what's displayed after the / in the URL. I prefer there not being a magpie.ishu.foo/home page, but rather only magpie.ishu.foo, that's the reason for this conditional.
 		page = name;
 	}
 
