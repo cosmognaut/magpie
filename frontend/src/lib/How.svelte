@@ -3,7 +3,7 @@
 </script>
 
 <h1 class="font-mono text-4xl mt-10 text-emerald-500 text-center">How does the categorisation work?</h1>
-<div class="max-w-5xl mx-auto text-xl">
+<div class="max-w-5xl md:mx-auto text-xl mx-6">
 	<p class="mt-6 border-l-3 pl-4 border-emerald-500"><span class="font-bold">TL;DR</span>: We use a machine learning model to represent video metadata as vectors in a high-dimensional vector space. We then project that space to low dimension for visualisation and clustering, using another model. We finally use a clustering algorithm to classify semantically similar neighbors into a single category. The last step was done manually here.</p>
 	<p class="mt-6">At its core, <span class="text-emerald-500 font-display text-2xl">magpie</span> uses a machine learning model trained on my own "watch later" playlist's videos. The first step is to take each video from the playlist and "clean" it so that future steps have a higher signal to noise ratio. We then need to make sure that the data being fed to the transformer is as <span class="italic">relevant</span> to the video content as possible, as that would decide what the output of the transformer looks like. </p>
 	<p class="mt-6">The next step is to map this clean data to a vector space, in order to generate something called an <span class="font-bold">embedding</span>. Words can be thought of as a vector of floats. Two vectors that are close to each other in that vector space have some semantic similarity. Here we use a metric called <span class="font-bold">cosine similarity</span>, which measures the angle between two vectors. Thus two words are similar if they are used in similar contexts. This idea generalises well to sentences and paragraphs too, which is exactly what we are dealing with here. </p>
