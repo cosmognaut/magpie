@@ -125,10 +125,16 @@
 				- we first rotate the gradient by 90 degrees to align it with the x-axis. We do the same thing as we did in the first gradient, it's just that this time it's rotated by 90 degrees. This means that this creates a vertical line at the right edge of the box.
 				- the last argument to background is a solid white color (with an opacity of 0.55). The solid background represents the base canvas of the layers and fills the entire screen. It means that whatever the intersection of the first two gradients was, takes this color. This means that our tiny 1px dots will be this slightly off-white in color.
 		*/
-		background: linear-gradient(black 79px, transparent 79px), linear-gradient(90deg, black 79px, transparent 79px), rgba(255, 255, 255, 0.65);
+		/* background: linear-gradient(black 79px, transparent 79px), linear-gradient(90deg, black 79px, transparent 79px), rgba(255, 255, 255, 0.65); */
+		background: linear-gradient(black 39px, transparent 39px, transparent 40px, black 40px), linear-gradient(90deg, black 39px, transparent 39px, transparent 40px, black 40px), rgba(255, 255, 255, 0.65); /* explained below */
 	  	background-position: center;
 	  	background-size: 80px 80px, 80px 80px, 80px 80px;
 		animation: infinite-loop 2000ms linear infinite;
+		/*
+			# Why did I write the new line and not keep the old grid?
+			Primarily because in a tile of size 80px 80px we were first drawing the dot at the point when the tile ended (i.e. 79px and then transparent). This pushed the dot to the bottom right edge of the tile and caused some symmetry issues on phones.
+			Right now, we are drawing a black screen for 39 pixels, a transparent line for 1px until 40px and then black again for another 40px to cover the whole 80px. This is better (and symmetrical) because it automatically centers the dots and doesn't push the dots to the right edge.
+		*/
   }
   
   @keyframes infinite-loop {
