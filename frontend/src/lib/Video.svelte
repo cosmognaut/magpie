@@ -3,7 +3,7 @@
 	import { formatISO, formatViews } from '../utils.svelte'
 </script>
 
-<div class="border w-110 h-75 flex-none py-2 px-2 relative hover:border-emerald-500 transition-colors">
+<div class="border w-110 h-75 flex-none py-2 px-2 relative hover:border-emerald-500 transition-colors grayscale hover:grayscale-0">
 	<a href="https://www.youtube.com/watch?v={id}">
 		<img src={thumbnail} alt="video thumbnail" class="w-full h-4/5 transition" loading="lazy">
 		<p class="bg-black absolute bottom-15 right-2 p-1">{formatISO(duration)}</p>
