@@ -151,3 +151,5 @@ Essentially, if you're me in the future and you want to deploy using fastapi clo
 I am almost amazed at how easy this was. That was amazing! Thanks tiangolo!
 
 I have made some fixes for phones specifically, as the screen was looking too "tight" without appropriate margins. It looks much, much better on phones now. And also, fastapi deploy is a bliss. Wait no the dots' distance needs to be reduced by a tiny bit for this to work properly.
+
+Oh no. The "fix" I made now makes the URL not update when HOME is clicked. Fixed: forward slash for website root, I was passing empty string which means keep the current path in the URL.
