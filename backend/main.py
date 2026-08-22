@@ -4,8 +4,16 @@ from app.database import get_genres, get_genre_videos
 
 app = FastAPI()
 
+@app.get("/api/health")
+def health():
+    return {"status": "ok"}
+
+app.frontend("/", directory="dist")
+
 origins = [
     'http://localhost:5173', # for development
+    'https://magpie.ishu.foo/', # main URL
+    'https://magpie.fastapicloud.dev' # alternative URL
 ]
 
 app.add_middleware(
