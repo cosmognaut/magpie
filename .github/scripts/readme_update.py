@@ -20,7 +20,7 @@ final_percentage_svelte = (int(sv_total) / total) * 100
 python_string = f"{round(final_percentage_python, 1)}"
 svelte_string = f"{round(final_percentage_svelte, 1)}"
 
-with open('../../README.md', 'r') as file:
+with open('README.md', 'r') as file:
     data = file.read()
 
 start_index = data.find('<!--START_LANG-->')
@@ -34,5 +34,5 @@ html_lines = svelte_line + python_line
 
 data = data[:start_index] + '<!--START_LANG-->\n' + html_lines + data[end_index:]
 
-with open('../../README.md', 'w') as file:
+with open('README.md', 'w') as file:
     file.write(data)
