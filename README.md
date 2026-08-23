@@ -10,6 +10,10 @@
     <a href="https://api.github.com/repos/cosmognaut/magpie/languages"><img src="https://img.shields.io/badge/Python-42.5%25-3776ab" alt="Python percentage" /></a>
 </p>
 
+<p align="center">
+    <img src="./frontend/src/assets/newplot.png" alt="HDBSCAN cluster visualization" />
+</p>
+
 ## Motivation
 I have been using YouTube for about nine years at this point. Over time, my viewing preferences have changed a lot. It can be hard to keep track of those changing preferences, and I would have liked a native way inside YouTube to categorise videos so that I know what I am/was really into at any point.
 
