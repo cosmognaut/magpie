@@ -208,3 +208,4 @@ There is already a "magpie enhancement proposals" file inside `frontend/src/`, b
 - Write a Dockerfile to make the project easier to develop.
 - Fuzzy search using Fuse.js. I had this idea after discussing genre search with Claude. I am implementing this on my own right now, but later in the future I would want to add fuzzy search for genres, as well as the video titles using that library.
 - Semantic search across the entire database. This means that I would need to revamp by sqlite database to also store the "final string" column of my pandas dataframe. Or I could use a vector database, but I really don't want to do that. I could take a query from the user and run a fuzzy search across the final strings field of my database and display the relevant results. It'd also teach me much about optimising for quick data lookup.
+- In-app video player using the YouTube iframe API.
