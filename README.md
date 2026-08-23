@@ -200,7 +200,7 @@ I am assuming you are present in the root folder (i.e. `.`, neither `frontend/` 
   fastapi deploy
   ```
 ## Enhancements
-There is already a "magpie enhancement proposals" files inside `frontend/src/`, but this one supersedes that. This list may also include some TODOs. Some enhancemeents I could do to make this project better include, in no particular order:
+There is already a "magpie enhancement proposals" file inside `frontend/src/`, but this one supersedes that. This list may also include some TODOs. Some enhancemeents I could do to make this project better include, in no particular order:
 - A classifier trained on existing video data that fixes the current issue of newer videos not being assigned a genre.
 - A unified database script to make things cleaner to develop. (Priority)
 - Use some other model to generate the embeddings just to test if it results in more accurate vectors (in terms of semantic similarity).
