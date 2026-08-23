@@ -171,7 +171,7 @@ To deploy the project locally for now, you can follow the below steps:
    FastAPI Cloud requires you to have the `dist/` folder in the same directory as the main FastAPI app. That's the reason for moving the `dist/` folder inside `backend/`.
 3. Because the `.fastapicloudignore` is already present, you can simply run the below commands.
    ```bash
-   cd .. # you should now be inside the backend folder
+   cd ../backend # you should now be inside the backend folder
    fastapi deploy
    ```
 That's it! `fastapi deploy` makes it really easy for you to deploy your applications.
