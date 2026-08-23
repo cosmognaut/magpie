@@ -70,6 +70,7 @@ We use the YouTube API v3 to ingest the data from a playlist. The actual watch-l
 
 ## Built with
 I used `sklearn` (Scikit-Learn) to train the machine learning model (using a pipeline). The vector embeddings were generated using `all-miniLM-L6-v2` from `Sentence-Transformers`. Other algorithms used were `UMAP` for dimensionality reduction and `HDBSCAN` for clustering. I used `pandas` and `numpy` for dataframe manipulation, as well as `plotly` for generating a visualisation. I also used `joblib` to download the trained model. Most of the machine learning steps were done on marimo's molab platform.
+
 The web application was created using Svelte (vanilla, not SvelteKit) + TypeScript using Vite as the build tool/bundler for the user interface; and FastAPI as the backend server, with SQLModel serving as the ORM. The database used was SQLite.
 
 ## Project structure
@@ -155,7 +156,7 @@ In the future, I will write a Dockerfile for the whole project, but right now so
     ```
 The user interface should now be available at `http://localhost:5173/` - it depends on your port.
 ## Deploying the application
-The project has been deploying using FastAPI Cloud. This makes it really easy to deploy the app via the command line. I am considering adding GitHub Actions CI later that deploys this on every push. 
+The project has been deployed using FastAPI Cloud. This makes it really easy to deploy the app via the command line. I am considering adding GitHub Actions CI later that deploys this on every push. 
 To deploy the project locally for now, you can follow the below steps:
 1. Make sure that you're in the frontend directory.
    ```bash
