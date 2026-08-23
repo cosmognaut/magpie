@@ -22,7 +22,8 @@
 5. [Development setup](https://github.com/cosmognaut/magpie/#development-setup)
 6. [Deployment](https://github.com/cosmognaut/magpie/#deploying-the-application)
 7. [Known issues](https://github.com/cosmognaut/magpie/#known-issues)
-8. [Roadmap](https://github.com/cosmognaut/magpie/#roadmap)
+8. [Quick reference](https://github.com/cosmognaut/magpie/#quick-reference)
+9. [Enhancements](https://github.com/cosmognaut/magpie/#enhancements)
 
 ## Motivation
 I have been using YouTube for about nine years at this point. Over time, my viewing preferences have changed a lot. It can be hard to keep track of those changing preferences, and I would have liked a native way inside YouTube to categorise videos so that I know what I am/was really into at any point.
