@@ -1,0 +1,34 @@
+name: Update README language stats
+
+on:
+  [push]
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run my script to update README
+        run: python .github/scripts/readme_update.py
+
+        # git diff --cached --quiet returns 0 on success (means there are no changes), and 1 on failure (means there are changes)
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions bot"
+          git config user.email "<>"
+          git add README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "bot: update readme with latest language stats"
+            git push origin main
+          fi
