@@ -15,14 +15,14 @@
 </p>
 
 ## Table of contents
-1. [Motivation](https://github.com/cosmognaut/magpie/edit/main/README.md#motivation)
-2. [Architecture](https://github.com/cosmognaut/magpie/edit/main/README.md#architecture)
-3. [Built with](https://github.com/cosmognaut/magpie/edit/main/README.md#built-with)
-4. [Project structure](https://github.com/cosmognaut/magpie/edit/main/README.md#project-structure)
-5. [Development setup](https://github.com/cosmognaut/magpie/edit/main/README.md#development-setup)
-6. [Deployment](https://github.com/cosmognaut/magpie/edit/main/README.md#deploying-the-application)
-7. [Known issues](https://github.com/cosmognaut/magpie/edit/main/README.md#known-issues)
-8. [Roadmap](https://github.com/cosmognaut/magpie/edit/main/README.md#roadmap)
+1. [Motivation](https://github.com/cosmognaut/magpie/README.md#motivation)
+2. [Architecture](https://github.com/cosmognaut/magpie/README.md#architecture)
+3. [Built with](https://github.com/cosmognaut/magpie/README.md#built-with)
+4. [Project structure](https://github.com/cosmognaut/magpie/README.md#project-structure)
+5. [Development setup](https://github.com/cosmognaut/magpie/README.md#development-setup)
+6. [Deployment](https://github.com/cosmognaut/magpie/README.md#deploying-the-application)
+7. [Known issues](https://github.com/cosmognaut/magpie/README.md#known-issues)
+8. [Roadmap](https://github.com/cosmognaut/magpie/README.md#roadmap)
 
 ## Motivation
 I have been using YouTube for about nine years at this point. Over time, my viewing preferences have changed a lot. It can be hard to keep track of those changing preferences, and I would have liked a native way inside YouTube to categorise videos so that I know what I am/was really into at any point.
