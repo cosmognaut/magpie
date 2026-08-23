@@ -89,4 +89,4 @@ df['genre'] = df.apply(assign_genre, axis=1)
 
 print(df.tail())
 
-df.to_parquet('assigned_genres.parquet')
+df.to_parquet('data/assigned_genres.parquet')

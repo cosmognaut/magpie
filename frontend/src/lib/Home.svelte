@@ -26,7 +26,7 @@
 		"Dividing by zero...",
 		"The British are coming!",
 		"I prefer the muddy water...",
-		"No animals harmed during the making of this..",
+		"No animals were harmed during the making of this..",
 		"Slay the mighty set!",
 		"WHOLE NEW WORLD",
 	]
