@@ -155,7 +155,7 @@ In the future, I will write a Dockerfile for the whole project, but right now so
     ```
 The user interface should now be available at `http://localhost:5173/` - it depends on your port.
 ## Deploying the application
-The project has been deploying using FastAPI Cloud. This makes it really easy to deploy the app via the command line. I am considering adding GitHub Actions CI later that deploys this on every push. 
+The project has been deployed using FastAPI Cloud. This makes it really easy to deploy the app via the command line. I am considering adding GitHub Actions CI later that deploys this on every push. 
 To deploy the project locally for now, you can follow the below steps:
 1. Make sure that you're in the frontend directory.
    ```bash
