@@ -56,7 +56,7 @@ We use the YouTube API v3 to ingest the data from a playlist. The actual watch-l
 
 
 ## Built with
-I used `sklearn` (Scikit-Learn) to train the machine learning model (using a pipeline). The vector embeddings were generated using `all-miniLM-L6-v2` from `Sentence-Transformers`. Other algorithms used were `UMAP` for dimensionality reduction and `HDBSCAN` for clustering. I used `pandas` and `numpy` for dataframe manipulation, as well as `plotly` for generating a visualisation.
+I used `sklearn` (Scikit-Learn) to train the machine learning model (using a pipeline). The vector embeddings were generated using `all-miniLM-L6-v2` from `Sentence-Transformers`. Other algorithms used were `UMAP` for dimensionality reduction and `HDBSCAN` for clustering. I used `pandas` and `numpy` for dataframe manipulation, as well as `plotly` for generating a visualisation. I also used `joblib` to download the trained model. Most of the machine learning steps were done on marimo's molab platform.
 The web application was created using Svelte (vanilla, not SvelteKit) + TypeScript using Vite as the build tool/bundler for the user interface; and FastAPI as the backend server, with SQLModel serving as the ORM. The database used was SQLite.
 
 ## Project structure
@@ -162,7 +162,12 @@ To deploy the project locally for now, you can follow the below steps:
    ```
 That's it! `fastapi deploy` makes it really easy for you to deploy your applications.
 
-## Todos
+## Known issues
+This can still be considered as a v0 for the project. As such, there are some known issues that may arise while developing or interacting with the application.
+- If the database has more videos than the number used to train the model (2339), some videos just don't get a genre. This is NOT intended and happens because some row id's are simply omitted when we run `uv run -m pipeline.genre` to populate the database with genres. The main source of the problem is the `clustered_watch_later.parquet` file inside `data/`. This file was generated after the model was trained on the videos and was downloaded from molab. A fix would be to train a classifier on the existing videos and labels and get it to categorise new videos after the database is populated.
+- The backend still doesn't have a unified script that auto-populates the database - that was the entire point of having the `scripts/` folder. A fix would be to create such a file and replace the six-or-so steps currently required to just run the backend.
+
+## Roadmap
 - [ ] Write this README, use mermaid for a diagram. 
 - [ ] Use GitHub actions for continuous integration , i.e. on a commit the project gets deployed.
 - [ ] Write a dockerfile later.
