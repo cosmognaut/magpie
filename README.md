@@ -55,7 +55,7 @@ flowchart TD
     end
 
     HDBSCAN --> YESORNO{Cluster found?}
-    YESORNO -->|Yes| MANUAL["Manual Labeling<br/>e.g. 'Horror', 'Tech'"]
+    YESORNO -->|Yes| MANUAL["Manual labeling<br/>e.g. 'Horror', 'Programming'"]
     YESORNO -->|No| MIXED[Mixed Bag]
 
     MANUAL --> FINAL[(Final Category)]
