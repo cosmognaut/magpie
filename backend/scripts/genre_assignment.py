@@ -42,7 +42,7 @@ def assign_genre(series: pd.Series):
     elif cluster in (3, 4):
         genre = "Food"
     elif cluster == 5:
-        genre = "Exercise"
+        genre = "Health and Lifestyle"
     elif cluster in (6, 7):
         genre = "Physics"
     elif cluster in (8, 9, 10, 11):
@@ -68,7 +68,7 @@ def assign_genre(series: pd.Series):
     elif cluster == 32:
         genre = "Earth and Anomlaies"
     elif cluster == 33:
-        genre = "Japanese Culture"
+        genre = "Animation and Culture"
     elif cluster == 34:
         genre = "Money and World Models"
     elif cluster == 35:

@@ -39,28 +39,27 @@ export function giveGenreDescription(genre: string): string {
 	if (genre === "Mixed Bag") return "A little bit of everything, like normal YouTube";
 	else if (genre === "Countries and Progress") return "Stories about countries, their systems and idiosyncrasies";
 	else if (genre === "Money and World Models") return "Videos related to economics, and models for the real world";
-	else if (genre === "Dark History") return "Where history meets horror...";
+	else if (genre === "Dark History") return "Where history meets horror..";
 	else if (genre === "Video Essays") return "Essays about essentially any topic you can think of";
 	else if (genre === "Earth and Anomlaies") return "Stories about our planet, its geography, and some mysteries related to the same";
-	else if (genre === "Exercise") return "Small habits, better you"; // to be renamed to health and lifestyle
+	else if (genre === "Health and Lifestyle") return "Small habits, better you"; // to be renamed to health and lifestyle
 	else if (genre === "Horror Games") return "Video games, but the ones that spook you out";
 	else if (genre === "General Gaming") return "Press start on something better";
 	else if (genre === "Philosophy") return '"The unexmained life is not worth living" - Socrates';
 	else if (genre === "Mindset and Thinking") return "Rewire the way you think";
 	else if (genre === "Food") return "What's cooking?";
 	else if (genre === "Linux and Tooling") return "fuck you NVIDIA";
-	else if (genre === "Programming") return '"If debugging is the process of removing software bugs, then programming must be the process of putting them in." - Dijkstra'; 
-	else if (genre === "Programming") return '"If debugging is the process of removing software bugs, then programming must be the process of putting them in." - Dijkstra';
-	else if (genre === "Japanese Culture") return "Selections from the Land of the Rising Sun"; // to be renamed later
+	else if (genre === "Programming") return "Talk is cheap. Show me the code."; 
+	else if (genre === "Animation and Culture") return "Animated selections and videos about culture";
 	else if (genre === "Learning and Productivity") return "What would you like to learn today?"; // maybe renamed
 	else if (genre === "Creativity") return "What the AIs cannot do"; // maybe renamed
 	else if (genre === "Physics") return "Reality, decoded";
 	else if (genre === "Mathematics") return "The language of the universe";
-	else if (genre === "Technology") return "Speedrunning p(doom)...";
+	else if (genre === "Technology") return "Speedrunning p(doom)..";
 	else if (genre === "Pokémon") return "Gotta catch 'em all!";
 	else if (genre === "The Sounds of Life") return "Curation on music and life";
 	// else if (genre === "The Internet") return "...minus the brainrot (hopefully)";
-	else return "...minus the brainrot (hopefully)";
+	else return "..minus the brainrot (hopefully)";
 }
 
 export function formatISO(duration: string): string {

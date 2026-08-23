@@ -27,10 +27,8 @@ from .database import select_videos_from_db
 
 if __name__ == "__main__":
     videos = select_videos_from_db()
+    genres = []
     print(len(videos))
-    videos = videos[:10]
     for video in videos:
-        print(video.title)
-        print(video.channel_name)
-        print(video.genre)
-
+        genres.append(video.genre)
+    print(set(genres))
