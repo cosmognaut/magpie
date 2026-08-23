@@ -31,12 +31,14 @@ flowchart TD
         PREPROCESS --> MINILM["Sentence-Transformers<br/>(all-MiniLM-L6-v2)<br/> 384-dim vector"]
     end
 
-    subgraph Reduce["Dimensionality Reduction"]
-        MINILM --> UMAP["UMAP<br/> 2D projection"]
-    end
-
-    subgraph Cluster["Clustering"]
-        UMAP --> HDBSCAN["HDBSCAN<br/>(density-based)"]
+    subgraph Pipeline["Pipeline"]
+        subgraph Reduce["Dimensionality Reduction"]
+            MINILM --> UMAP["UMAP<br/> 2D projection"]
+        end
+    
+        subgraph Cluster["Clustering"]
+            UMAP --> HDBSCAN["HDBSCAN<br/>(density-based)"]
+        end
     end
 
     HDBSCAN --> YESORNO{Cluster found?}
