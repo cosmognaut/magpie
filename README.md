@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-    <img src="./frontend/src/assets/newplot.png" alt="HDBSCAN cluster visualization" />
+    <img src="./frontend/src/assets/UI-screenshot.png" alt="UI screenshot" />
 </p>
 
 ## Motivation
@@ -49,6 +49,11 @@ flowchart TD
 We use the YouTube API v3 to ingest the data from a playlist. The actual watch-later playlist on YouTube does not have a public URL one can use to call the API, so I had to create a separate playlist with the same videos on which the API could be called. The `UMAP` and `HDBSCAN` steps are wrapped together using `sklearn.pipeline.make_pipeline`, and persisted as `genre_pipeline.pkl`  which is the pickle file present inside `backend/`.
 
 **A note on performance measure**: HDBSCAN's `relative_validity_` (DBCV) was initially chosen to be the performance measure for the model, but I quickly realised that it was not a good measure as human evaluation was the only metric that actually mattered for my clusters.
+
+<p align="center">
+    <img src="./frontend/src/assets/newplot.png" alt="HDBSCAN cluster visualization" />
+</p>
+
 
 ## Built with
 I used `sklearn` (Scikit-Learn) to train the machine learning model (using a pipeline). The vector embeddings were generated using `all-miniLM-L6-v2` from `Sentence-Transformers`. Other algorithms used were `UMAP` for dimensionality reduction and `HDBSCAN` for clustering. I used `pandas` and `numpy` for dataframe manipulation, as well as `plotly` for generating a visualisation.
