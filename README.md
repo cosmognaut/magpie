@@ -179,9 +179,31 @@ This can still be considered as a v0 for the project. As such, there are some kn
 - If the database has more videos than the number used to train the model (2339), some videos just don't get a genre. This is NOT intended and happens because some row id's are simply omitted when we run `uv run -m pipeline.genre` to populate the database with genres. The main source of the problem is the `clustered_watch_later.parquet` file inside `data/`. This file was generated after the model was trained on the videos and was downloaded from molab. A fix would be to train a classifier on the existing videos and labels and get it to categorise new videos after the database is populated.
 - The backend still doesn't have a unified script that auto-populates the database - that was the entire point of having the `scripts/` folder. A fix would be to create such a file and replace the six-or-so steps currently required to just run the backend.
 
-## Roadmap
-- [ ] Write this README, use mermaid for a diagram. 
-- [ ] Use GitHub actions for continuous integration , i.e. on a commit the project gets deployed.
-- [ ] Write a dockerfile later.
-- [ ] Unified database script
-- [ ] train a classifier
+## Quick reference
+I am assuming you are present in the root folder (i.e. `.`, neither `frontend/` nor `backend/`). This is a quick reference for some common tasks you may need to perform:
+- Popualte the database
+  ```bash
+  cd backend
+  uv run -m scripts.main # assuming you already have a .env here
+  uv run -m pipeline.genres # add genres
+  uv run -m app.test_db # test DB
+  ```
+- Redeploy the application
+  ```bash
+  cd frontend
+  npm run build
+  rm -rf ../backend/dist/ # if there is a dist/ from a previous deploy
+  mv dist/ ../backend/
+  cd ..
+  cd backend
+  fastapi deploy
+  ```
+## Enhancements
+There is already a "magpie enhancement proposals" files inside `frontend/src/`, but this one supersedes that. This list may also include some TODOs. Some enhancemeents I could do to make this project better include, in no particular order:
+- A classifier trained on existing video data that fixes the current issue of newer videos not being assigned a genre.
+- A unified database script to make things cleaner to develop. (Priority)
+- Use some other model to generate the embeddings just to test if it results in more accurate vectors (in terms of semantic similarity).
+- Use GitHub actions for continuous integration; i.e. on a commit the project gets deployed.
+- Write a Dockerfile to make the project easier to develop.
+- Fuzzy search using Fuse.js. I had this idea after discussing genre search with Claude. I am implementing this on my own right now, but later in the future I would want to add fuzzy search for genres, as well as the video titles using that library.
+- Semantic search across the entire database. This means that I would need to revamp by sqlite database to also store the "final string" column of my pandas dataframe. Or I could use a vector database, but I really don't want to do that. I could take a query from the user and run a fuzzy search across the final strings field of my database and display the relevant results. It'd also teach me much about optimising for quick data lookup.
