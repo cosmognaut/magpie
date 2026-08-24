@@ -7,8 +7,8 @@
     <a href="https://molab.marimo.io/notebooks/nb_oRD5sTmfW1hC8BSTkGBxZM"><img src="https://marimo.io/molab-shield.svg" alt="Open in molab" /></a>
     <a href="https://magpie.ishu.foo/"><img src="https://img.shields.io/badge/visit-darkgreen?link=https%3A%2F%2Fmagpie.ishu.foo%2F" alt="visit button" /></a>
     <!--START_LANG-->
-	<a href="https://api.github.com/repos/cosmognaut/magpie/languages"><img src="https://img.shields.io/badge/Svelte-42.8%25-ff3e00" alt="Svelte percentage" /></a>
-	<a href="https://api.github.com/repos/cosmognaut/magpie/languages"><img src="https://img.shields.io/badge/Python-42.9%25-3776ab" alt="Python percentage" /></a>
+	<a href="https://api.github.com/repos/cosmognaut/magpie/languages"><img src="https://img.shields.io/badge/Svelte-42.1%25-ff3e00" alt="Svelte percentage" /></a>
+	<a href="https://api.github.com/repos/cosmognaut/magpie/languages"><img src="https://img.shields.io/badge/Python-43.9%25-3776ab" alt="Python percentage" /></a>
 <!--END_LANG-->
 </p>
 
