@@ -206,9 +206,9 @@ I am assuming you are present in the root folder (i.e. `.`, neither `frontend/` 
 ## Enhancements
 There is already a "magpie enhancement proposals" file inside `frontend/src/`, but this one supersedes that. This list may also include some TODOs. Some enhancemeents I could do to make this project better include, in no particular order:
 - A classifier trained on existing video data that fixes the current issue of newer videos not being assigned a genre.
-- A unified database script to make things cleaner to develop. (Priority)
+- ~A unified database script to make things cleaner to develop. (Priority)~
 - Use some other model to generate the embeddings just to test if it results in more accurate vectors (in terms of semantic similarity).
-- Use GitHub actions for continuous integration; i.e. on a commit the project gets deployed.
+- ~Use GitHub actions for continuous integration; i.e. on a commit the project gets deployed.~
 - Write a Dockerfile to make the project easier to develop.
 - Fuzzy search using Fuse.js. I had this idea after discussing genre search with Claude. I am implementing this on my own right now, but later in the future I would want to add fuzzy search for genres, as well as the video titles using that library.
 - Semantic search across the entire database. This means that I would need to revamp by sqlite database to also store the "final string" column of my pandas dataframe. Or I could use a vector database, but I really don't want to do that. I could take a query from the user and run a fuzzy search across the final strings field of my database and display the relevant results. It'd also teach me much about optimising for quick data lookup.
