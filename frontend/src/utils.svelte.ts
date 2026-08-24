@@ -40,7 +40,7 @@ export function giveGenreDescription(genre: string): string {
 	else if (genre === "Countries and Progress") return "Stories about countries, their systems and idiosyncrasies";
 	else if (genre === "Money and World Models") return "Videos related to economics, and models for the real world";
 	else if (genre === "Dark History") return "Where history meets horror..";
-	else if (genre === "Video Essays") return "Essays about essentially any topic you can think of";
+	else if (genre === "Video Essays") return "Essays and deep dives into essentially any topic you can think of";
 	else if (genre === "Earth and Anomlaies") return "Stories about our planet, its geography, and some mysteries related to the same";
 	else if (genre === "Health and Lifestyle") return "Small habits, better you"; // to be renamed to health and lifestyle
 	else if (genre === "Horror Games") return "Video games, but the ones that spook you out";
@@ -49,7 +49,7 @@ export function giveGenreDescription(genre: string): string {
 	else if (genre === "Mindset and Thinking") return "Rewire the way you think";
 	else if (genre === "Food") return "What's cooking?";
 	else if (genre === "Linux and Tooling") return "fuck you NVIDIA";
-	else if (genre === "Programming") return "Talk is cheap. Show me the code."; 
+	else if (genre === "Programming") return '"Talk is cheap. Show me the code." - Torvalds'; 
 	else if (genre === "Animation and Culture") return "Animated selections and videos about culture";
 	else if (genre === "Learning and Productivity") return "What would you like to learn today?"; // maybe renamed
 	else if (genre === "Creativity") return "What the AIs cannot do"; // maybe renamed
