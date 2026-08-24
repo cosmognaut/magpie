@@ -32,3 +32,8 @@ if __name__ == "__main__":
     for video in videos:
         genres.append(video.genre)
     print(set(genres))
+    subset = videos[:10]
+    for video in subset:
+        print(video.title)
+        print(video.genre)
+        print("\n")
