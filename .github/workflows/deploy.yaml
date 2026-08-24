@@ -1,0 +1,42 @@
+name: Deploy the application to FastAPI Cloud 
+
+on:
+  [push]
+
+# each individual job step runs inside a separate shell, so it goes back to the project root
+# I have already defined repository secrets in GitHub settings
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Install UI dependencies and build frontend
+        uses: actions/setup-node@v7
+        working-directory: ./frontend
+        with:
+          node-version: 24
+          package-manager-cache: false
+        run: |
+          npm ci
+          npm run build
+          rm -rf ../backend/dist/
+          mv dist/ ../backend/
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+
+      - name: Install dependencies for the backend and deploy to FastAPI Cloud
+        uses: actions/setup-python@v7
+        working-directory: ./backend
+        with:
+          python-version: '3.x'
+        env: 
+          YOUTUBE_API_KEY: ${{secrets.YOUTUBE_API_KEY}}
+          PLAYLIST_ID: ${{secrets.PLAYLIST_ID}}
+        run: |
+          uv venv
+          source .venv/bin/activate
+          uv sync
+          uv run -m scripts.main
+          fastapi deploy
