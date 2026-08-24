@@ -8,15 +8,19 @@ on:
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-
     steps:
 
-      - name: Install UI dependencies and build frontend
+      - name: Checkout repository code
+        uses: actions/checkout@v7
+
+      - name: Setup npm
         uses: actions/setup-node@v7
-        working-directory: ./frontend
         with:
           node-version: 24
           package-manager-cache: false
+
+      - name: Install UI dependencies and build frontend
+        working-directory: ./frontend
         run: |
           npm ci
           npm run build
@@ -26,17 +30,20 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
 
-      - name: Install dependencies for the backend and deploy to FastAPI Cloud
+      - name: Setup python
         uses: actions/setup-python@v7
-        working-directory: ./backend
-        with:
+        with: 
           python-version: '3.x'
+
+      - name: Install dependencies for the backend and deploy to FastAPI Cloud
+        working-directory: ./backend
         env: 
           YOUTUBE_API_KEY: ${{secrets.YOUTUBE_API_KEY}}
           PLAYLIST_ID: ${{secrets.PLAYLIST_ID}}
+          FASTAPI_CLOUD_TOKEN: ${{secrets.FASTAPI_CLOUD_TOKEN}}
         run: |
           uv venv
           source .venv/bin/activate
           uv sync
           uv run -m scripts.main
-          fastapi deploy
+          fastapi deploy --app-id 'b7b15966-1485-4528-8024-d0f2af732919'
