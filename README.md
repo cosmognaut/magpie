@@ -135,12 +135,10 @@ In the future, I will write a Dockerfile for the whole project, but right now so
    ```
 5. Now we will actually populate the database. We are using a simple `sqlite` database here, powered by the `SQLModel` ORM. Use the following commands:
    ```bash
-   uv run -m scripts.main # creates and populates the database, note that the genres have NOT been assigned yet
-   uv run -m app.test_db # to test if the database is populated - you will NOT see any genres yet
-   uv run -m pipeline.genres # to actually assign the genres in the database
-   uv run -m app.test_db # the videos should have genres now
+   uv run -m scripts.main # creates and populates the database; also assigns the genres as per assigned_genres.parquet
+   uv run -m app.test_db # to test if the database is populated and how many genres are there
    ```
-   If you are getting any empty videos in this step (i.e. videos that don't have a genre), this is because it was added to the database after the last clustering run and needs to be re-processed. I am working on finding a pragmatic fix for this, a great fix would probably be training a classifier based on the existing dataset.
+   Any videos that don't have a genre are currently being assigned the 'Mixed Bag' genre by default. This is intended, but is not optimal. A more pragmatic fix would be to train a classifier based on the existing labels and have that categorise the videos.
 6. You're ready to serve the endpoint now. Just use FastAPI here, the entrypoint has already been set to `main:app`.
    ```bash
    fastapi dev
@@ -181,8 +179,7 @@ That's it! `fastapi deploy` makes it really easy for you to deploy your applicat
 
 ## Known issues
 This can still be considered as a v0 for the project. As such, there are some known issues that may arise while developing or interacting with the application.
-- If the database has more videos than the number used to train the model (2339), some videos just don't get a genre. This is NOT intended and happens because some row id's are simply omitted when we run `uv run -m pipeline.genre` to populate the database with genres. The main source of the problem is the `clustered_watch_later.parquet` file inside `data/`. This file was generated after the model was trained on the videos and was downloaded from molab. A fix would be to train a classifier on the existing videos and labels and get it to categorise new videos after the database is populated.
-- The backend still doesn't have a unified script that auto-populates the database - that was the entire point of having the `scripts/` folder. A fix would be to create such a file and replace the six-or-so steps currently required to just run the backend.
+- If the database has more videos than the number used to train the model (2339), videos are automatically assigned the 'Mixed Bag' genre. While this is intended, this is not optimal and it would be better for new videos to get a proper genre assignment. The main source of the problem is the `clustered_watch_later.parquet` file inside `data/`. This file was generated after the model was trained on the videos and was downloaded from molab. A fix would be to train a classifier on the existing videos and labels and get it to categorise new videos after the database is populated.
 
 ## Quick reference
 I am assuming you are present in the root folder (i.e. `.`, neither `frontend/` nor `backend/`). This is a quick reference for some common tasks you may need to perform:
@@ -190,7 +187,6 @@ I am assuming you are present in the root folder (i.e. `.`, neither `frontend/` 
   ```bash
   cd backend
   uv run -m scripts.main # assuming you already have a .env here
-  uv run -m pipeline.genres # add genres
   uv run -m app.test_db # test DB
   ```
 - Redeploy the application
