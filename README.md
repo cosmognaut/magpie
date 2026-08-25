@@ -121,7 +121,7 @@ For developing magpie locally, you can either use Docker or follow the steps man
    git clone https://github.com/cosmognaue/magpie.git
    cd magpie
    ```
-2. First, let's create a `.env` file so that we have some environment variables in place.
+2. Then, let's create a `.env` file so that we have some environment variables in place.
    ```bash
    # this should be done at the project root
    touch .env
@@ -198,7 +198,7 @@ That's it for Docker! I plan to publish an image to Docker Hub later.
    fastapi dev
    ```
 7. Now visit `http://127.0.0.1:8000/api/health` to see if the endpoint is running. You should see a `status: ok` message. You are now serving the videos via the endpoint at `http://127.0.0.1:8000/videos/`.
-8. Now we will shift our attention to the user interface. First, go into the frontend directory and install dependencies:
+8. Let's now  shift our attention to the user interface. First, go into the frontend directory and install dependencies:
     ```bash
     cd .. # you should now be at the root
     cd frontend
@@ -214,11 +214,11 @@ That's it for Docker! I plan to publish an image to Docker Hub later.
    VITE_API_URL="http://127.0.0.1:8000/videos/"
    ```
    
-	10. For local development setups, you can use Vite
-	   ```bash
-	   npx vite
-	   ```
-	   The user interface should now be available at `http://localhost:5173/` - it depends on your port.
+10. For local development setups, you can use Vite.
+    ```bash
+    npx vite
+    ```
+    The user interface should now be available at `http://localhost:5173/` - it depends on your port.
 
 ## Deploying the application
 The project has been deployed using FastAPI Cloud. This makes it really easy to deploy the app via the command line. I am considering adding GitHub Actions CI later that deploys this on every push. 
