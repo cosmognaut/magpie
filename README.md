@@ -118,7 +118,7 @@ For developing magpie locally, you can either use Docker or follow the steps man
 ### Part A: Using Docker
 1. First, clone the repository:
    ```bash
-   git clone https://github.com/cosmognaue/magpie.git
+   git clone https://github.com/cosmognaut/magpie.git
    cd magpie
    ```
 2. Then, let's create a `.env` file so that we have some environment variables in place.
@@ -152,13 +152,13 @@ For developing magpie locally, you can either use Docker or follow the steps man
    ```bash
    cd frontend
    docker build --tag cosmognaut/magpie-frontend . # you can use any tag you like, use docker image ls to check it later
-   docker run --detach -p 127.0.0.1:5173:90 cosmognaut/magpie-frontend:latest
-   cd ../backend/
+   docker run --env-file ../.env --detach -p 127.0.0.1:5173:90 cosmognaut/magpie-frontend:latest   cd ../backend/
    docker build --tag cosmognaut/magpie-backend .
-   docker run --detach -p 127.0.0.1:8000:80 cosmognaut/magpie-backend:latest
+   docker run --env-file ../.env --detach -p 127.0.0.1:5173:90 cosmognaut/magpie-frontend:latest
    ```
-That's it for Docker! I plan to publish an image to Docker Hub later.
+If you are experiencing an error because of space related issues, it might be useful to prune the build cache. Use `docker system prune` to do that.
 
+That's it for Docker! I plan to publish an image to Docker Hub later.
 ### Part B: Manual setup
 1. Again, clone the repository
    ```bash
