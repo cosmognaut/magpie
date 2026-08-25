@@ -1,7 +1,7 @@
 name: magpie
 services:
   backend:
-    image: cosmognaut/magpie-backend 
+    image: cosmognaut/magpie-backend:v1
     ports:
       - "127.0.0.1:8000:80"
     environment:
@@ -11,7 +11,7 @@ services:
       - sqlite:/app/backend/database/
 
   frontend:
-    image: cosmognaut/magpie-frontend
+    image: cosmognaut/magpie-frontend:v1
     ports:
       - "127.0.0.1:5173:90"
     environment:
