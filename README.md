@@ -213,6 +213,7 @@ That's it for Docker! I plan to publish an image to Docker Hub later.
    ```.env
    VITE_API_URL="http://127.0.0.1:8000/videos/"
    ```
+
 10. For local development setups, you can use Vite
    ```bash
    npx vite
