@@ -139,7 +139,7 @@ For developing magpie locally, you can either use Docker or follow the steps man
    ```
    This might take a while to install project dependencies. When it's done, you should be able to access the user interface at `http://localhost:5173/`, while the server is available via `http://127.0.0.1:8000/videos/`. To check the server health 	you can use `http://127.0.0.1:8000/api/health/` - you should see a `status: ok` message.
 
-   The `--watch` flag makes sure that this single command makes you absolutely ready for development. Thus, you can go ahead and modify anything (like `/frontend/src/`) and you should have the container sync things automatically.
+   The `--watch` flag makes you absolutely ready for development. Thus, you can go ahead and modify anything (like `/frontend/src/`) and you should have the container sync things automatically.
    
    **Note**: On initial startup it might take a minute for the SQL transactions to go through, so you will see an error at `http://localhost:5173/`. This resolves automatically after about a minute, when `fastapi` finally runs the server.
 4. The database is mounted as a volume, so it will persist between teardowns:
