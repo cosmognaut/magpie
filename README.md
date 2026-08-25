@@ -129,15 +129,16 @@ For developing magpie locally, you can either use Docker or follow the steps man
    ```
    Inside the `.env`, you need to add a YouTube Data API v3 key (which is available via GCP), a playlist ID, (available via the playlist URL), and the URL for the backend server. An example:
    ```env
-   	YOUTUBE_API_KEY=AI..
-	PLAYLIST_ID=PL..
-	VITE_API_URL="http://127.0.0.1:8000/videos/"
+   YOUTUBE_API_KEY=AI..
+   PLAYLIST_ID=PL..
+   VITE_API_URL="http://127.0.0.1:8000/videos/"
    ```
-2. Now you will find three things: a `compose.yaml` folder in the project root, a `Dockerfile` in `frontend/`, and another in `backend/`. To orchestrate your containers using `docker compose`, use the below command:
+3. Now you will find three things: a `compose.yaml` folder in the project root, a `Dockerfile` in `frontend/`, and another in `backend/`. To orchestrate your containers using `docker compose`, use the below command:
    ```bash
    docker compose up --build --watch
    ```
    This might take a while to install project dependencies. When it's done, you should be able to access the user interface at `http://localhost:5173/`, while the server is available via `http://127.0.0.1:8000/videos/`. To check the server health 	you can use `http://127.0.0.1:8000/api/health/` - you should see a `status: ok` message.
+
    The `--watch` flag makes sure that this single command makes you absolutely ready for development. Thus, you can go ahead and modify anything (like `/frontend/src/`) and you should have the container sync things automatically.
    
    **Note**: On initial startup it might take a minute for the SQL transactions to go through, so you will see an error at `http://localhost:5173/`. This resolves automatically after about a minute, when `fastapi` finally runs the server.
@@ -203,7 +204,16 @@ That's it for Docker! I plan to publish an image to Docker Hub later.
     cd frontend
     npm ci
     ```
-9. For local development setups, you can use Vite
+9. Add a `.env` file for the frontend, using the backend API URL. This has already been done for you in `.env.example`.
+   ```bash
+   touch .env
+   vim .env
+   ```
+   Inside the file, it should have something like this:
+   ```.env
+   VITE_API_URL="http://127.0.0.1:8000/videos/"
+   ```
+10. For local development setups, you can use Vite
    ```bash
     npx vite
     ```
