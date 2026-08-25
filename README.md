@@ -275,7 +275,7 @@ Now, use the following command:
 docker compose --file compose.production.yaml up
 ```
 ## Enhancements
-There is already a "magpie enhancement proposals" file inside `frontend/src/`, but this one supersedes that. This list may also include some TODOs. Some enhancemeents I could do to make this project better include, in no particular order:
+There is already a "magpie enhancement proposals" file inside `frontend/src/`, but this one supersedes that. This list may also include some TODOs. Some enhancements I could do to make this project better include, in no particular order:
 - A classifier trained on existing video data that fixes the current issue of newer videos not being assigned a genre.
 - ~Add a .env for frontend API_URL.~
 - ~A unified database script to make things cleaner to develop. (Priority)~
