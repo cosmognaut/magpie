@@ -13,7 +13,7 @@
 	let keyCombinationCanHappen: boolean = false; // for CTRL-K, see advancedSearch
 	let keyCombinationActivated: boolean = false;
 
-	const API_URL = 'https://magpie.ishu.foo/videos/'; // using the main URL
+	const API_URL = import.meta.env.VITE_API_URL; // using the main URL
 	let data;
 
 	// credit: https://gist.github.com/meain/6440b706a97d2dd71574769517e7ed32

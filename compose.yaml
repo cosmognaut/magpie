@@ -1,0 +1,43 @@
+name: magpie
+services:
+
+  backend:
+    build: ./backend/
+    ports:
+      - "127.0.0.1:8000:80"
+    environment:
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
+      - PLAYLIST_ID=${PLAYLIST_ID}
+    develop:
+      watch:
+        - action: sync
+          path: ./backend/
+          target: /app/backend/
+          # we have already ignored stuff in .dockerignore
+        - action: rebuild
+          path: ./backend/pyproject.toml
+        - action: rebuild
+          path: ./backend/uv.lock
+    volumes:
+      - sqlite:/app/backend/database/
+
+  frontend:
+    build: ./frontend/ 
+    ports:
+      - "127.0.0.1:5173:90"
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend/
+          target: /app/frontend/
+          # we have already ignored stuff in .dockerignore
+        - action: rebuild
+          path: ./frontend/package.json
+        - action: rebuild
+          path: ./frontend/package-lock.json
+volumes:
+  sqlite:
+    name: sqlite_volume 
+
