@@ -217,7 +217,7 @@ That's it for Docker! I plan to publish an image to Docker Hub later.
    ```bash
     npx vite
    ```
-The user interface should now be available at `http://localhost:5173/` - it depends on your port.
+   The user interface should now be available at `http://localhost:5173/` - it depends on your port.
 
 ## Deploying the application
 The project has been deployed using FastAPI Cloud. This makes it really easy to deploy the app via the command line. I am considering adding GitHub Actions CI later that deploys this on every push. 
