@@ -4,6 +4,7 @@ from pipeline.fetch import get_playlist_videos, get_videos_list
 from app.models import Video
 from app.database import insert_videos_to_db, create_db_and_tables, select_videos_from_db, add_genre
 from typing import Sequence
+from pathlib import Path
 
 async def get_videos():
     """ Fetches data from YouTube API and inserts that data into the database """
@@ -29,8 +30,11 @@ def check_nothing_assigned():
             video = add_genre(str(video.id), "Mixed Bag")
 
 if __name__ == "__main__":
-    videos_list = asyncio.run(get_videos())
-    create_db_and_tables()
-    insert_videos_to_db(videos_list)
-    assign_genre_to_videos()
-    check_nothing_assigned()
+    if not Path('database/database.db').exists():
+        videos_list = asyncio.run(get_videos())
+        create_db_and_tables()
+        insert_videos_to_db(videos_list)
+        assign_genre_to_videos()
+        check_nothing_assigned()
+    else:
+        print("The database already exists. Delete it inside /database/ to generate a new database.")
