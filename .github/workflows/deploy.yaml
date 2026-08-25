@@ -6,7 +6,7 @@ on:
 # each individual job step runs inside a separate shell, so it goes back to the project root
 # I have already defined repository secrets in GitHub settings
 jobs:
-  update-readme:
+  deploy:
     runs-on: ubuntu-latest
     steps:
 
