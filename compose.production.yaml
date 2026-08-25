@@ -1,0 +1,22 @@
+name: magpie
+services:
+  backend:
+    image: cosmognaut/magpie-backend 
+    ports:
+      - "127.0.0.1:8000:80"
+    environment:
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
+      - PLAYLIST_ID=${PLAYLIST_ID}
+    volumes:
+      - sqlite:/app/backend/database/
+
+  frontend:
+    image: cosmognaut/magpie-frontend
+    ports:
+      - "127.0.0.1:5173:90"
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+volumes:
+  sqlite:
+    name: sqlite_volume 
+

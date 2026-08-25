@@ -25,7 +25,8 @@
 7. [Deployment](https://github.com/cosmognaut/magpie/#deploying-the-application)
 8. [Known issues](https://github.com/cosmognaut/magpie/#known-issues)
 9. [Quick reference](https://github.com/cosmognaut/magpie/#quick-reference)
-10. [Enhancements](https://github.com/cosmognaut/magpie/#enhancements)
+10. [Hosting locally](https://github.com/cosmognaut/magpie/#hosting-locally)
+11. [Enhancements](https://github.com/cosmognaut/magpie/#enhancements)
 
 ## Motivation
 I have been using YouTube for about nine years at this point. Over time, my viewing preferences have changed a lot. It can be hard to keep track of those changing preferences, and I would have liked a native way inside YouTube to categorise videos so that I know what I am/was really into at any point.
@@ -249,7 +250,7 @@ This can still be considered as a v0 for the project. As such, there are some kn
 
 ## Quick reference
 I am assuming you are present in the root folder (i.e. `.`, neither `frontend/` nor `backend/`). This is a quick reference for some common tasks you may need to perform:
-- Popualte the database
+- Populate the database
   ```bash
   cd backend
   uv run -m scripts.main # assuming you already have a .env here
@@ -265,14 +266,22 @@ I am assuming you are present in the root folder (i.e. `.`, neither `frontend/` 
   cd backend
   fastapi deploy
   ```
+## Hosting locally
+If you want to host magpie locally, you can use the `compose.production.yaml` file present inside the project root. It pulls images from the Docker Hub registry.
+First get set up with a `.env` in the project root. Refer to the instructions [given above](https://github.com/cosmognaut/magpie/#development-setup).
+
+Now, use the following command:
+```bash
+docker compose --file compose.production.yaml up
+```
 ## Enhancements
 There is already a "magpie enhancement proposals" file inside `frontend/src/`, but this one supersedes that. This list may also include some TODOs. Some enhancemeents I could do to make this project better include, in no particular order:
 - A classifier trained on existing video data that fixes the current issue of newer videos not being assigned a genre.
-- Add a .env for frontend API_URL.
+- ~Add a .env for frontend API_URL.~
 - ~A unified database script to make things cleaner to develop. (Priority)~
 - Use some other model to generate the embeddings just to test if it results in more accurate vectors (in terms of semantic similarity).
 - ~Use GitHub actions for continuous integration; i.e. on a commit the project gets deployed.~
-- Write a Dockerfile to make the project easier to develop.
+- ~Write a Dockerfile to make the project easier to develop.~
 - Fuzzy search using Fuse.js. I had this idea after discussing genre search with Claude. I am implementing this on my own right now, but later in the future I would want to add fuzzy search for genres, as well as the video titles using that library.
 - Semantic search across the entire database. This means that I would need to revamp by sqlite database to also store the "final string" column of my pandas dataframe. Or I could use a vector database, but I really don't want to do that. I could take a query from the user and run a fuzzy search across the final strings field of my database and display the relevant results. It'd also teach me much about optimising for quick data lookup.
 - In-app video player using the YouTube iframe API.
