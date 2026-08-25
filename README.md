@@ -216,7 +216,7 @@ That's it for Docker! I plan to publish an image to Docker Hub later.
 10. For local development setups, you can use Vite
    ```bash
     npx vite
-    ```
+   ```
 The user interface should now be available at `http://localhost:5173/` - it depends on your port.
 
 ## Deploying the application
