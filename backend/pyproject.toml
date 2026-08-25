@@ -21,3 +21,10 @@ dependencies = [
 ]
 [tool.fastapi]
 entrypoint = "main:app"
+
+[tool.uv.sources]
+torch = { index = "pytorch" }
+
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cpu"

@@ -13,4 +13,5 @@ wheels/
 .env
 
 # database
+database/
 database.db
