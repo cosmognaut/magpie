@@ -152,9 +152,10 @@ For developing magpie locally, you can either use Docker or follow the steps man
    ```bash
    cd frontend
    docker build --tag cosmognaut/magpie-frontend . # you can use any tag you like, use docker image ls to check it later
-   docker run --env-file ../.env --detach -p 127.0.0.1:5173:90 cosmognaut/magpie-frontend:latest   cd ../backend/
-   docker build --tag cosmognaut/magpie-backend .
    docker run --env-file ../.env --detach -p 127.0.0.1:5173:90 cosmognaut/magpie-frontend:latest
+   cd ../backend/
+   docker build --tag cosmognaut/magpie-backend .
+   docker run --env-file ../.env --detach -p 127.0.0.1:8000:80 cosmognaut/magpie-backend:latest
    ```
 If you are experiencing an error because of space related issues, it might be useful to prune the build cache. Use `docker system prune` to do that.
 
