@@ -13,7 +13,7 @@
 	<img src={plot} alt="plot" class="mt-6"/>
 	<p class="mt-1 text-lg text-amber-200">The grey dots represent the videos that could not be categorised into any cluster - this later forms the <span class="italic">Mixed Bag</span> genre in our selection.</p>
 	<p class="mt-6">Now comes human intervention. Or, if you're feeling brave today, you could use LLMs for this. But I wanted to do this myself. The next step indeed is to look at all the clusters and find some connected links between them, in order to give it a name. For example, you spot a neighborhood of dots, all of which seem like they belong to the 'Horror' cluster. Then you simply assign that label to that cluster, and call it a day. That is the simplest form of content categorisation and is what I did here. One could also go one step beyond and train a classifier based on those labels provided earlier, but that is something that I didn't do here, mostly because I didn't want to.</p>
-	<p class="mt-6">For more information, feel free to give the README a read.
+	<p class="mt-6">For more information, feel free to give the <a href="https://github.com/cosmognaut/magpie/"><span class="border-b-2 border-gray-500 hover:border-emerald-500 transition-colors">README</span></a> a read.
 </p>
 </div>
 
