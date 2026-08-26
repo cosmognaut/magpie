@@ -51,4 +51,6 @@ jobs:
           uv sync
           uv run -m scripts.main
           ls -a
+          cat .fastapicloudignore
+          cat .gitignore
           fastapi deploy --app-id 'b7b15966-1485-4528-8024-d0f2af732919'
