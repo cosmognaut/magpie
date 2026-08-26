@@ -1,0 +1,2 @@
+Codeberg is an open soure platform that's got limited resources to run CI/CD pipelines. I don't want to milk their resources just for mirroring my already existing pipeline on GitHub Actions. Thus, I have decided not to update the `runs-on` field in my workflows inside my `.forgejo` folder.
+This means that my CI/CD setup is now strictly managed by GitHub Actions. I think I am okay with that, at least for now.
