@@ -1,0 +1,53 @@
+name: Deploy the application to FastAPI Cloud 
+
+on:
+  [push]
+
+# each individual job step runs inside a separate shell, so it goes back to the project root
+# I have already defined repository secrets in GitHub settings
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout repository code
+        uses: actions/checkout@v7
+
+      - name: Setup npm
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Install UI dependencies and build frontend
+        working-directory: ./frontend
+        env:
+          VITE_API_URL: ${{secrets.VITE_API_URL}}
+        run: |
+          npm ci
+          npm run build
+          rm -rf ../backend/dist/
+          mv dist/ ../backend/
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+
+      - name: Setup python
+        uses: actions/setup-python@v7
+        with: 
+          python-version: '3.x'
+
+      # we move the .dockerignore up a directory because that shit takes precedence over .fastapicloudignore which I don't want - as my database wasn't being uploaded
+      - name: Install dependencies for the backend and deploy to FastAPI Cloud
+        working-directory: ./backend
+        env: 
+          YOUTUBE_API_KEY: ${{secrets.YOUTUBE_API_KEY}}
+          PLAYLIST_ID: ${{secrets.PLAYLIST_ID}}
+          FASTAPI_CLOUD_TOKEN: ${{secrets.FASTAPI_CLOUD_TOKEN}}
+        run: |
+          uv venv
+          source .venv/bin/activate
+          uv sync
+          uv run -m scripts.main
+          mv .dockerignore ..
+          fastapi deploy --app-id 'b7b15966-1485-4528-8024-d0f2af732919'
