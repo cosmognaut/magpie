@@ -110,6 +110,7 @@ The project is structured around two main folders, for the backend and the user 
 │   ├── tsconfig.json
 │   ├── tsconfig.node.json
 │   └── vite.config.ts # vite configuration, for svelte and tailwind
+└── .github # GitHub Actions workflows and scripts for CI
 ├── LICENSE # project license
 └── README.md # you are here
 ```
@@ -241,8 +242,11 @@ To deploy the project locally for now, you can follow the below steps:
 3. Because the `.fastapicloudignore` is already present, you can simply run the below commands.
    ```bash
    cd ../backend # you should now be inside the backend folder
+   mv .dockerignore .. # needed, see below
    fastapi deploy
+   mv ../.dockerignore .
    ```
+   The `.dockerignore` file was found to supersede the `.fastapicloudignore` file. Thus, we need to remove it from the folder either by deleting it altogether before deployment, or moving it up a folder so that `.fastapicloudignore` takes precedence. This was done in the CI pipeline too.
 That's it! `fastapi deploy` makes it really easy for you to deploy your applications.
 
 ## Known issues
@@ -265,7 +269,9 @@ I am assuming you are present in the root folder (i.e. `.`, neither `frontend/` 
   mv dist/ ../backend/
   cd ..
   cd backend
+  mv .dockerignore ..
   fastapi deploy
+  mv ../.dockerignore .
   ```
 ## Hosting locally
 If you want to host magpie locally, you can use the `compose.production.yaml` file present inside the project root. It pulls images from the Docker Hub registry.
