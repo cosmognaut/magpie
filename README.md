@@ -17,16 +17,16 @@
 </p>
 
 ## Table of contents
-1. [Motivation](https://github.com/cosmognaut/magpie/#motivation)
-2. [Architecture](https://github.com/cosmognaut/magpie/#architecture)
-3. [Built with](https://github.com/cosmognaut/magpie/#built-with)
-4. [Project structure](https://github.com/cosmognaut/magpie/#project-structure)
-5. [Development setup](https://github.com/cosmognaut/magpie/#development-setup)
-7. [Deployment](https://github.com/cosmognaut/magpie/#deploying-the-application)
-8. [Known issues](https://github.com/cosmognaut/magpie/#known-issues)
-9. [Quick reference](https://github.com/cosmognaut/magpie/#quick-reference)
-10. [Hosting locally](https://github.com/cosmognaut/magpie/#hosting-locally)
-11. [Enhancements](https://github.com/cosmognaut/magpie/#enhancements)
+1. [Motivation](#motivation)
+2. [Architecture](#architecture)
+3. [Built with](#built-with)
+4. [Project structure](#project-structure)
+5. [Development setup](#development-setup)
+6. [Deployment](#deploying-the-application)
+7. [Known issues](#known-issues)
+8. [Quick reference](#quick-reference)
+9. [Hosting locally](#hosting-locally)
+10. [Enhancements](#enhancements)
 
 ## Motivation
 I have been using YouTube for about nine years at this point. Over time, my viewing preferences have changed a lot. It can be hard to keep track of those changing preferences, and I would have liked a native way inside YouTube to categorise videos so that I know what I am/was really into at any point.
@@ -59,7 +59,7 @@ flowchart TD
     YESORNO -->|Yes| MANUAL["Manual labeling<br/>e.g. 'Horror', 'Programming'"]
     YESORNO -->|No| MIXED[Mixed Bag]
 
-    MANUAL --> FINAL[(Final Category)]
+    MANUAL --> FINAL[(Final Genre)]
     MIXED --> FINAL
 ```
 We use the YouTube API v3 to ingest the data from a playlist. The actual watch-later playlist on YouTube does not have a public URL one can use to call the API, so I had to create a separate playlist with the same videos on which the API could be called. The `UMAP` and `HDBSCAN` steps are wrapped together using `sklearn.pipeline.make_pipeline`, and persisted as `genre_pipeline.pkl`  which is the pickle file present inside `backend/`.
@@ -95,6 +95,7 @@ The project is structured around two main folders, for the backend and the user 
 │   ├── test.py # minor dataframe test, irrelevant
 │   └── uv.lock
 ├── compose.yaml # main compose file for the project
+├── compose.production.yaml # alternate compose file for hosting locally 
 ├── frontend
 │   ├── Dockerfile # for frontend container
 │   ├── index.html
@@ -114,7 +115,7 @@ The project is structured around two main folders, for the backend and the user 
 ```
 
 ## Development setup
-For developing magpie locally, you can either use Docker or follow the steps manually. Both are supported. If you are installing the dependencies manually, I will be making two assumptions: first, that you have `uv` installed; and second, that you have `npm` installed. That's it. For Docker I will just assume that you have `docker compose` installed. Also, on some systems you also need the `docker-buildx` package for latest support.
+For developing magpie locally, you can either use Docker or follow the steps manually. Both are supported. If you are installing the dependencies manually, I will be making two assumptions: first, that you have `uv` installed; and second, that you have `npm` installed. That's it. For Docker I will just assume that you have `docker compose` installed. On some systems you also need the `docker-buildx` package for latest support.
 
 ### Part A: Using Docker
 1. First, clone the repository:
@@ -160,7 +161,7 @@ For developing magpie locally, you can either use Docker or follow the steps man
    ```
    If you are experiencing an error because of space related issues, it might be useful to prune the build cache. Use `docker system prune` to do that.
 
-   That's it for Docker! I plan to publish an image to Docker Hub later.
+   That's it for Docker! I have also published an image to Docker Hub. Fore more information on that, see [hosting](#hosting-locally).
    
 ### Part B: Manual setup
 1. Again, clone the repository
@@ -268,7 +269,7 @@ I am assuming you are present in the root folder (i.e. `.`, neither `frontend/` 
   ```
 ## Hosting locally
 If you want to host magpie locally, you can use the `compose.production.yaml` file present inside the project root. It pulls images from the Docker Hub registry.
-First get set up with a `.env` in the project root. Refer to the instructions [given above](https://github.com/cosmognaut/magpie/#development-setup).
+First get set up with a `.env` in the project root. Refer to the instructions [given above](#development-setup).
 
 Now, use the following command:
 ```bash
