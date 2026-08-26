@@ -28,8 +28,6 @@ jobs:
           npm run build
           rm -rf ../backend/dist/
           mv dist/ ../backend/
-          cd ..
-          tree -L 2
 
       - name: Install uv
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -39,6 +37,7 @@ jobs:
         with: 
           python-version: '3.x'
 
+      # we move the .dockerignore up a directory because that shit takes precedence over .fastapicloudignore which I don't want - as my database wasn't being uploaded
       - name: Install dependencies for the backend and deploy to FastAPI Cloud
         working-directory: ./backend
         env: 
@@ -50,7 +49,5 @@ jobs:
           source .venv/bin/activate
           uv sync
           uv run -m scripts.main
-          ls -a
-          cat .fastapicloudignore
-          cat .gitignore
+          mv .dockerignore ..
           fastapi deploy --app-id 'b7b15966-1485-4528-8024-d0f2af732919'
