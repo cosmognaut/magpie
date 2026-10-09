@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.database import get_genres, get_genre_videos
+from app.database import get_ordered_videos
+from itertools import groupby
 
 app = FastAPI()
 
@@ -26,12 +27,11 @@ app.add_middleware(
 
 @app.get("/videos/")
 async def get_videos():
-    genres = sorted(get_genres())
-    final_dict = {}
-    for genre in genres:
-        genre_video_list = get_genre_videos(genre)
-        final_dict[genre] = genre_video_list
-    return final_dict
+    ordered_vids = get_ordered_videos()
+    genre_dict = {}
+    for key, group in groupby(ordered_vids, key=lambda video: video.genre):
+            genre_dict[key] = list(group)
+    return genre_dict
 
 # @app.get("/videos/")
 # async def get_videos():

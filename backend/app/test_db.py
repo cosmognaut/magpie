@@ -1,6 +1,7 @@
 import sqlite3
 from .models import Video
-from .database import select_videos_from_db
+from .database import get_ordered_videos 
+from itertools import groupby
 #
 # with sqlite3.connect('database.db') as conn:
 #     cur = conn.cursor()
@@ -26,14 +27,9 @@ from .database import select_videos_from_db
 #
 
 if __name__ == "__main__":
-    videos = select_videos_from_db()
-    genres = []
-    print(len(videos))
-    for video in videos:
-        genres.append(video.genre)
-    print(set(genres))
-    subset = videos[:10]
-    for video in subset:
-        print(video.title)
-        print(video.genre)
-        print("\n")
+    ordered_vids = get_ordered_videos()
+    genre_dict = {}
+    for key, group in groupby(ordered_vids, key=lambda video: video.genre):
+            genre_dict[key] = list(group)
+    print(genre_dict.keys())
+    print(len(genre_dict))

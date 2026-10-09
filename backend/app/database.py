@@ -1,5 +1,6 @@
 from typing import Sequence
 from sqlmodel import SQLModel, Session, create_engine, select
+from sqlalchemy import select as sqlalchemy_select
 from app.models import Video
 
 sqlite_file_name = "database/database.db"
@@ -25,26 +26,35 @@ def select_videos_from_db() -> Sequence[Video]:
         results = session.exec(statement)
         return results.all()
 
-def add_genre(video_id: str, genre: str) -> Video:
-    """ UPDATE a single Video record in the database and return the updated object """
+def add_genre(video_id: str, genre: str) -> Video | None:
+    """ UPDATE a single Video record in the database and return the updated object; additionally return None if the video record does not exist in the database """
     with Session(engine) as session:
         statement = select(Video).where(Video.id == video_id)
-        found_video = session.exec(statement).one()
+        found_video = session.exec(statement).one_or_none()
+        if not found_video:
+            return None
         found_video.genre = genre
         session.add(found_video)
         session.commit()
         session.refresh(found_video)
         return found_video
 
-def get_genres() -> set[str]:
-    """ Return all genres present in the database """
-    videos = select_videos_from_db()
-    genres: list = [video.genre for video in videos]
-    return set(genres)
+# def get_genres() -> set[str]:
+#     """ Return all genres present in the database """
+#     videos = select_videos_from_db()
+#     genres: list = [video.genre for video in videos]
+#     return set(genres)
+#
+# def get_genre_videos(genre: str) -> Sequence[Video]:
+#     """ Return all videos belonging to a particular genre """
+#     with Session(engine) as session:
+#         statement = select(Video).where(Video.genre == genre)
+#         found = session.exec(statement).all()
+#         return found
 
-def get_genre_videos(genre: str) -> Sequence[Video]:
-    """ Return all videos belonging to a particular genre """
+def get_ordered_videos() -> Sequence[Video]:
+    """ Return all videos ORDER BY Video.genre """
     with Session(engine) as session:
-        statement = select(Video).where(Video.genre == genre)
-        found = session.exec(statement).all()
-        return found
+        statement = select(Video).order_by(Video.genre).where(Video.genre.is_not(None))
+        res = session.exec(statement).all()
+        return res
